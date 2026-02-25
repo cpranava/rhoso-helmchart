@@ -40,6 +40,20 @@ rabbitmq:
       # tls:
       #   secretName: rabbitmq-tls
 
+      # -- advanced.config (Erlang terms format)
+      # Use for low-level RabbitMQ tuning when additional.conf is not enough.
+      # advancedConfig: |
+      #   [
+      #    {rabbit, [
+      #      {cluster_partition_handling, autoheal}
+      #    ]}
+      #   ].
+
+      # -- additional.conf (INI-like rabbitmq.conf fragments)
+      # additionalConfig: |
+      #   cluster_partition_handling = autoheal
+      #   vm_memory_high_watermark.relative = 0.7
+
     # Optional: dedicated notifications cluster
     # rabbitmq-cell1:
     #   replicas: 1

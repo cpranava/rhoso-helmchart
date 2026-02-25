@@ -29,6 +29,19 @@ rabbitmq:
         {{- toYaml . | nindent 8 }}
       {{- end }}
 
+      {{- with $inst.advancedConfig }}
+      # -- RabbitMQ advanced.config content (Erlang terms)
+      #    Applied verbatim by the operator; use for low-level broker tuning.
+      advancedConfig: |-
+        {{- . | nindent 8 }}
+      {{- end }}
+
+      {{- with $inst.additionalConfig }}
+      # -- RabbitMQ additional.conf content (INI-style)
+      additionalConfig: |-
+        {{- . | nindent 8 }}
+      {{- end }}
+
       {{- with $inst.nodeSelector }}
       # -- Node selector override for this cluster
       nodeSelector:
