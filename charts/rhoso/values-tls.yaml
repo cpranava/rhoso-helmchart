@@ -1,0 +1,66 @@
+# =============================================================================
+# TLS Configuration
+# Ref: TLSSection in openstackcontrolplane_types.go
+# =============================================================================
+# Controls TLS for both ingress (public routes) and pod-level (service mesh).
+# By default, both are enabled with 10-year CA and 5-year cert durations.
+
+tls:
+
+  # ---------------------------------------------------------------------------
+  # Ingress TLS — public-facing routes (OpenShift Routes)
+  # ---------------------------------------------------------------------------
+  ingress:
+    # Enable TLS termination at the ingress/route level
+    enabled: true
+
+    # CA certificate lifetime (default: 87600h = 10 years)
+    ca:
+      duration: "87600h"
+      # renewBefore: "720h"
+      # customIssuer: my-issuer   # use a pre-existing cert-manager Issuer
+
+    # Server certificate lifetime (default: 43800h = 5 years)
+    cert:
+      duration: "43800h"
+      # renewBefore: "360h"
+
+    # Override TLS for a specific public endpoint:
+    # tls:
+    #   secretName: my-custom-ingress-tls-secret
+
+  # ---------------------------------------------------------------------------
+  # Pod-level TLS — internal service-to-service encryption
+  # ---------------------------------------------------------------------------
+  podLevel:
+    # Enable TLS termination at the pod level (mTLS between services)
+    enabled: true
+
+    # Internal CA — used for all control plane and data plane endpoints
+    # except OVN and libvirt
+    internal:
+      ca:
+        duration: "87600h"
+      cert:
+        duration: "43800h"
+
+    # Libvirt CA — used for libvirt/QEMU services on control plane and data plane
+    libvirt:
+      ca:
+        duration: "87600h"
+      cert:
+        duration: "43800h"
+
+    # OVN CA — used for all OVN services on control plane and data plane
+    ovn:
+      ca:
+        duration: "87600h"
+      cert:
+        duration: "43800h"
+
+  # ---------------------------------------------------------------------------
+  # Additional CA bundle (optional)
+  # Add custom CA certificates that should be trusted by all deployment pods.
+  # Required if any service uses a custom cert/key signed by a private CA.
+  # ---------------------------------------------------------------------------
+  # caBundleSecretName: my-ca-bundle-secret

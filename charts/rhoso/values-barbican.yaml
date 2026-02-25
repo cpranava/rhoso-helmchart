@@ -1,0 +1,69 @@
+# =============================================================================
+# Barbican - Key Manager Service
+# Ref: barbicanv1.BarbicanSpecCore
+# Enabled by default
+# =============================================================================
+
+barbican:
+  enabled: true
+
+  # -- APIOverride: customize the public route or TLS for Barbican API
+  apiOverride:
+    route: {}
+    # tls:
+    #   secretName: barbican-public-tls
+
+  template:
+    # -- MariaDB instance name
+    # +kubebuilder:default=openstack
+    databaseInstance: openstack
+
+    # -- MariaDB account name for Barbican
+    # +kubebuilder:default=barbican
+    # databaseAccount: barbican
+
+    # -- Secret containing OpenStack passwords
+    # secret: osp-secret
+
+    # -- Custom oslo.config snippets appended to barbican.conf
+    # customServiceConfig: |
+    #   [DEFAULT]
+    #   debug = false
+
+    # -- Barbican API timeout in seconds (default: 90)
+    # +kubebuilder:default=90
+    # apiTimeout: 90
+
+    # -- ServiceAccount name for Barbican (required by CRD; created by operator)
+    serviceAccount: barbican
+
+    # -- Barbican API sub-spec
+    barbicanAPI:
+      # -- Number of Barbican API replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # resources: {}
+      # override:
+      #   service: {}
+      # networkAttachments: []
+
+    # -- Barbican Worker sub-spec
+    barbicanWorker:
+      # -- Number of Barbican Worker replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # resources: {}
+
+    # -- Barbican Keystone Listener sub-spec
+    barbicanKeystoneListener:
+      # -- Number of Barbican KeystoneListener replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # resources: {}
+
+    # -- Node selector for all Barbican pods
+    # nodeSelector: {}
+
+  # -- ApplicationCredential config (optional)
+  # applicationCredential:
+  #   enabled: false

@@ -1,0 +1,88 @@
+# =============================================================================
+# Glance - Image Service
+# Ref: glancev1.GlanceSpecCore
+# Enabled by default
+# Note: uses 'apiOverrides' (plural, map) not 'apiOverride'
+# =============================================================================
+
+glance:
+  enabled: true
+
+  # -- apiOverrides: map keyed by GlanceAPI instance name
+  # Customize routes/TLS per named GlanceAPI
+  apiOverrides:
+    default:
+      route: {}
+      # tls:
+      #   secretName: glance-public-tls
+
+  # -- uniquePodNames: avoids pod-name collisions in multi-cell deployments
+  # uniquePodNames: false
+
+  template:
+    # -- StorageClass for the Glance backend PVC (falls back to global)
+    # storageClass: ""
+
+    # -- Storage request size for the image store PVC
+    # +kubebuilder:default="10G"
+    storageRequest: "10G"
+
+    # -- MariaDB instance name (required by CRD)
+    # +kubebuilder:default=openstack
+    databaseInstance: openstack
+
+    # -- Memcached instance name (required by CRD)
+    # +kubebuilder:default=memcached
+    memcachedInstance: memcached
+
+    # -- Secret containing OpenStack passwords (required by CRD)
+    secret: osp-secret
+
+    # -- Keystone endpoint type used to register Glance (required by CRD)
+    # +kubebuilder:default=public
+    keystoneEndpoint: public
+
+    # -- Image cache settings (required by CRD)
+    # size: PVC size for the image cache volume (0 disables caching)
+    imageCache:
+      size: "10Gi"
+      # cleanerScheduler:
+      #   schedule: "@weekly"
+      # prunerScheduler:
+      #   schedule: "@weekly"
+
+    # -- Custom oslo.config snippets appended to glance-api.conf
+    # customServiceConfig: |
+    #   [DEFAULT]
+    #   debug = false
+
+    # -- Named GlanceAPI instances (at least one required — 'default')
+    glanceAPIs:
+      default:
+        # -- Deployment type: single or split (split separates internal/external)
+        # +kubebuilder:default=split
+        type: split
+
+        # -- Number of Glance API replicas
+        # +kubebuilder:default=1
+        replicas: 1
+
+        # -- Resource requests/limits
+        # resources:
+        #   requests:
+        #     cpu: 100m
+        #     memory: 512Mi
+        #   limits:
+        #     cpu: 1000m
+        #     memory: 2Gi
+
+        # -- Additional network attachments (Multus)
+        # networkAttachments:
+        #   - internalapi
+
+    # -- Node selector for all Glance API pods
+    # nodeSelector: {}
+
+  # -- ApplicationCredential config (optional)
+  # applicationCredential:
+  #   enabled: false

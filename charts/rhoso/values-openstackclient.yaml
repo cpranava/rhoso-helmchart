@@ -1,0 +1,32 @@
+# =============================================================================
+# OpenStackClient
+# Ref: OpenStackClientSpecCore in openstackclient_types.go
+# =============================================================================
+# The OpenStackClient pod provides a pre-configured shell environment with
+# the OpenStack CLI tools and clouds.yaml/secure.yaml pre-mounted.
+# It is always deployed — there is no enabled/disabled flag.
+
+openstackclient:
+  template:
+
+    # Name of the ConfigMap containing clouds.yaml
+    # Created automatically by the operator (default: openstack-config)
+    openStackConfigMap: openstack-config
+
+    # Name of the Secret containing secure.yaml (passwords)
+    # Created automatically by the operator (default: openstack-config-secret)
+    openStackConfigSecret: openstack-config-secret
+
+    # Optional: restrict the client pod to specific nodes
+    # nodeSelector:
+    #   kubernetes.io/hostname: worker-0
+
+    # Optional: extra environment variables injected into the client pod
+    # env:
+    #   - name: OS_CLOUD
+    #     value: default
+    #   - name: http_proxy
+    #     value: http://proxy.example.com:3128
+
+    # Optional: additional CA certificates to trust inside the client pod
+    # caBundleSecretName: my-ca-bundle-secret

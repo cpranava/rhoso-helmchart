@@ -1,0 +1,55 @@
+# =============================================================================
+# Placement - Resource Placement Service
+# Ref: placementv1.PlacementAPISpecCore
+# Enabled by default
+# =============================================================================
+
+placement:
+  enabled: true
+
+  # -- APIOverride: customize the public route or TLS for Placement
+  apiOverride:
+    route: {}
+    # tls:
+    #   secretName: placement-public-tls
+
+  template:
+    # -- Number of Placement API replicas
+    # +kubebuilder:default=1
+    replicas: 1
+
+    # -- MariaDB instance name (must match a Galera templates key)
+    # +kubebuilder:default=openstack
+    databaseInstance: openstack
+
+    # -- MariaDB account for Placement
+    # +kubebuilder:default=placement
+    # databaseAccount: placement
+
+    # -- Secret containing OpenStack passwords (required by CRD)
+    secret: osp-secret
+
+    # -- Custom oslo.config snippets appended to placement.conf
+    # customServiceConfig: |
+    #   [DEFAULT]
+    #   debug = false
+
+    # -- Resource requests/limits
+    # resources:
+    #   requests:
+    #     cpu: 100m
+    #     memory: 256Mi
+    #   limits:
+    #     cpu: 500m
+    #     memory: 512Mi
+
+    # -- Additional network attachments (Multus)
+    # networkAttachments:
+    #   - internalapi
+
+    # -- Node selector for Placement pods
+    # nodeSelector: {}
+
+  # -- ApplicationCredential config (optional; also requires global applicationCredential.enabled)
+  # applicationCredential:
+  #   enabled: false

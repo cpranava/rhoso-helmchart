@@ -1,0 +1,44 @@
+# =============================================================================
+# DNS - DNSMasq Infrastructure Service
+# Ref: networkv1.DNSMasqSpecCore
+# Enabled by default
+# =============================================================================
+
+dns:
+  enabled: true
+
+  template:
+    # -- Number of dnsmasq replicas to run
+    # +kubebuilder:default=1
+    replicas: 1
+
+    # -- Custom dnsmasq options appended to the generated config
+    # options:
+    #   - key: server
+    #     values:
+    #       - "8.8.8.8"
+    #       - "8.8.4.4"
+
+    # -- Additional network attachments (Multus)
+    # networkAttachments:
+    #   - ctlplane
+
+    # -- External endpoints that dnsmasq should override / serve
+    # externalEndpoints: []
+
+    # -- Override of the generated Service (e.g. to add annotations)
+    # override:
+    #   service: {}
+
+    # -- Resource requests/limits for the dnsmasq container
+    # resources:
+    #   requests:
+    #     cpu: 100m
+    #     memory: 64Mi
+    #   limits:
+    #     cpu: 500m
+    #     memory: 256Mi
+
+    # -- Node selector for the dnsmasq pods
+    # nodeSelector:
+    #   kubernetes.io/hostname: worker-0

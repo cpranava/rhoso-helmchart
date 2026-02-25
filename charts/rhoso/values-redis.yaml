@@ -1,0 +1,46 @@
+# =============================================================================
+# Redis - In-Memory Key/Value Store
+# Ref: redisv1.RedisSpecCore
+# Disabled by default (required by Octavia and Designate when enabled)
+# Note: map-based — each key is a named Redis instance
+# =============================================================================
+
+redis:
+  enabled: false
+
+  # templates: map of named Redis instances
+  # Example instance names expected by services:
+  #   octavia: 'octavia-redis'
+  #   designate: 'designate-redis'
+  templates:
+
+    octavia-redis:
+      # -- Number of Redis replicas (with Sentinel for HA)
+      # +kubebuilder:default=1
+      replicas: 1
+
+      # -- TLS settings for Redis connections
+      # tls:
+      #   secretName: redis-tls
+
+      # -- Resource requests/limits for the Redis container
+      # resources:
+      #   requests:
+      #     cpu: 100m
+      #     memory: 128Mi
+      #   limits:
+      #     cpu: 500m
+      #     memory: 512Mi
+
+      # -- Resource requests/limits for Sentinel containers
+      # sentinelResources:
+      #   requests:
+      #     cpu: 50m
+      #     memory: 64Mi
+
+      # -- Node selector for Redis pods
+      # nodeSelector: {}
+
+    # Optional: dedicated Redis instance for Designate
+    # designate-redis:
+    #   replicas: 1

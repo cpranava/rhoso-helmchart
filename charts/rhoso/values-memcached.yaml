@@ -1,0 +1,40 @@
+# =============================================================================
+# Memcached - Distributed Object Cache
+# Ref: memcachedv1.MemcachedSpecCore
+# Enabled by default
+# Note: map-based — each key is a named Memcached instance
+#       Most services reference a Memcached instance by name
+#       (default: "memcached")
+# =============================================================================
+
+memcached:
+  enabled: true
+
+  # templates: map of named Memcached instances
+  templates:
+
+    # Default instance — referenced as 'memcachedInstance: memcached' by most services
+    memcached:
+      # -- Number of Memcached replicas
+      # +kubebuilder:default=1
+      replicas: 1
+
+      # -- Maximum memory (in MB) for the Memcached instance
+      # +kubebuilder:default=1024
+      # maxMemoryMB: 1024
+
+      # -- Resource requests/limits for the Memcached container
+      # resources:
+      #   requests:
+      #     cpu: 100m
+      #     memory: 256Mi
+      #   limits:
+      #     cpu: 500m
+      #     memory: 1Gi
+
+      # -- Node selector override for this instance
+      # nodeSelector: {}
+
+      # -- TLS settings
+      # tls:
+      #   secretName: memcached-tls

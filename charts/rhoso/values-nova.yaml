@@ -1,0 +1,120 @@
+# =============================================================================
+# Nova - Compute Service
+# Ref: novav1.NovaSpecCore
+# Enabled by default
+# Note: Nova is composed of: novaAPI, novaScheduler, novaMetadata,
+#       novaCell0/novaCell1 (each with novaConductor, novaMetadata,
+#       novaNoVNCProxy). Cell0 is mandatory and has no compute nodes.
+# =============================================================================
+
+nova:
+  enabled: true
+
+  # -- APIOverride: customize the public route or TLS for Nova API
+  apiOverride:
+    route: {}
+    # tls:
+    #   secretName: nova-public-tls
+
+  # -- cellOverride: per-cell route/TLS overrides
+  # cellOverride:
+  #   cell1:
+  #     noVNCProxyOverride:
+  #       route: {}
+
+  template:
+    # -- MariaDB instance name for the Nova 'api' and 'cell0' databases
+    # +kubebuilder:default=openstack
+    apiDatabaseInstance: openstack
+
+    # -- Memcached instance name
+    # +kubebuilder:default=memcached
+    # memcachedInstance: memcached
+
+    # -- RabbitMQ cluster name
+    # +kubebuilder:default=rabbitmq
+    # rabbitMqClusterName: rabbitmq
+
+    # -- Secret containing OpenStack passwords (required by CRD)
+    secret: osp-secret
+
+    # -- Custom oslo.config snippets appended to nova.conf globally
+    # customServiceConfig: |
+    #   [DEFAULT]
+    #   debug = false
+
+    # -------------------------------------------------------------------------
+    # Nova API
+    # -------------------------------------------------------------------------
+    novaAPI:
+      # -- Number of Nova API replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # override:
+      #   service: {}
+      # resources: {}
+      # networkAttachments: []
+
+    # -------------------------------------------------------------------------
+    # Nova Scheduler
+    # -------------------------------------------------------------------------
+    novaScheduler:
+      # -- Number of Nova Scheduler replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # resources: {}
+
+    # -------------------------------------------------------------------------
+    # Nova Metadata (top-level, served via the API)
+    # -------------------------------------------------------------------------
+    novaMetadata:
+      # +kubebuilder:default=1
+      replicas: 1
+      # resources: {}
+
+    # -------------------------------------------------------------------------
+    # Nova Cells
+    # Cell0 is mandatory (runs DB sync, no compute). Cell1 is the default cell.
+    # -------------------------------------------------------------------------
+    cellTemplates:
+
+      cell0:
+        # -- Cell0 always points to the primary API database
+        cellDatabaseInstance: openstack
+        # -- Database account name (required by CRD)
+        # +kubebuilder:default=nova-cell0
+        cellDatabaseAccount: nova-cell0
+        # -- Cell0 has API access to retrieve flavor info
+        # +kubebuilder:default=true
+        hasAPIAccess: true
+        novaConductor:
+          replicas: 1
+          # resources: {}
+
+      cell1:
+        # -- Cell1 uses a dedicated database (openstack-cell1 Galera instance)
+        cellDatabaseInstance: openstack-cell1
+        # -- Database account name (required by CRD)
+        # +kubebuilder:default=nova-cell1
+        cellDatabaseAccount: nova-cell1
+        # +kubebuilder:default=rabbitmq
+        # cellMessageBusInstance: rabbitmq
+        # -- Cell1 has API access
+        # +kubebuilder:default=true
+        hasAPIAccess: true
+        novaConductor:
+          replicas: 1
+          # resources: {}
+        novaMetadata:
+          replicas: 1
+          # resources: {}
+        novaNoVNCProxy:
+          replicas: 1
+          # resources: {}
+
+    # -- Node selector for all Nova pods
+    # nodeSelector: {}
+
+  # -- ApplicationCredential config (optional)
+  # applicationCredential:
+  #   enabled: false

@@ -1,0 +1,92 @@
+# =============================================================================
+# Ironic - Bare Metal Provisioning Service
+# Ref: ironicv1.IronicSpecCore
+# Disabled by default
+# Note: Has both apiOverride (Ironic API) and inspectorOverride (Ironic Inspector)
+# =============================================================================
+
+ironic:
+  enabled: false
+
+  # -- apiOverride: customize the public route or TLS for Ironic API
+  apiOverride:
+    route: {}
+    # tls:
+    #   secretName: ironic-public-tls
+
+  # -- inspectorOverride: customize the public route or TLS for Ironic Inspector
+  inspectorOverride:
+    route: {}
+    # tls:
+    #   secretName: ironic-inspector-tls
+
+  template:
+    # -- MariaDB instance name
+    # +kubebuilder:default=openstack
+    databaseInstance: openstack
+
+    # -- Memcached instance name
+    # +kubebuilder:default=memcached
+    # memcachedInstance: memcached
+
+    # -- RabbitMQ cluster name
+    # +kubebuilder:default=rabbitmq
+    # rabbitMqClusterName: rabbitmq
+
+    # -- Secret containing OpenStack passwords (required by CRD)
+    secret: osp-secret
+
+    # -- StorageClass for Ironic conductor PVCs (required by CRD; empty uses global)
+    storageClass: ""
+
+    # -- DHCP ranges for Ironic provisioning network
+    # rpcTransport: oslo
+    # standalone: false
+
+    # -- Custom oslo.config snippets appended to ironic.conf
+    # customServiceConfig: |
+    #   [DEFAULT]
+    #   debug = false
+
+    # -- Ironic API sub-spec
+    ironicAPI:
+      # -- Number of Ironic API replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # override:
+      #   service: {}
+      # resources: {}
+      # networkAttachments: []
+
+    # -- Ironic Conductor sub-spec
+    ironicConductors:
+      - replicas: 1
+        # -- Storage request for conductor PVC (required by CRD)
+        storageRequest: "10G"
+        # -- StorageClass for conductor PVC (required by CRD; empty uses global)
+        storageClass: ""
+        # networkAttachments:
+        #   - baremetal
+        # resources: {}
+
+    # -- Ironic Inspector sub-spec
+    ironicInspector:
+      # -- Number of Ironic Inspector replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # dhcpRanges: []
+      # resources: {}
+      # networkAttachments: []
+
+    # -- Ironic Neutron Agent sub-spec
+    ironicNeutronAgent:
+      replicas: 1
+      # rabbitMqClusterName: rabbitmq
+      # resources: {}
+
+    # -- Node selector for all Ironic pods
+    # nodeSelector: {}
+
+  # -- ApplicationCredential config (optional)
+  # applicationCredential:
+  #   enabled: false

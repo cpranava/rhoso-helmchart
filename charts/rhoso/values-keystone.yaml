@@ -1,0 +1,62 @@
+# =============================================================================
+# Keystone - Identity Service
+# Ref: keystonev1.KeystoneAPISpecCore
+# Enabled by default
+# =============================================================================
+
+keystone:
+  enabled: true
+
+  # -- APIOverride: customize the public route or TLS for the Keystone endpoint
+  apiOverride:
+    route: {}
+    # tls:
+    #   secretName: keystone-public-tls
+
+  template:
+    # -- Number of Keystone API replicas
+    # +kubebuilder:default=1
+    replicas: 1
+
+    # -- MariaDB instance name (required by CRD)
+    # +kubebuilder:default=openstack
+    databaseInstance: openstack
+
+    # -- Memcached instance name (required by CRD)
+    # +kubebuilder:default=memcached
+    memcachedInstance: memcached
+
+    # -- Secret containing OpenStack passwords (required by CRD)
+    secret: osp-secret
+
+    # -- Custom oslo.config snippets appended to keystone.conf
+    # customServiceConfig: |
+    #   [DEFAULT]
+    #   debug = false
+
+    # -- Override specific config files (e.g. policy.json, logging.conf)
+    # defaultConfigOverwrite:
+    #   policy.json: |
+    #     {}
+
+    # -- Resource requests/limits for the Keystone API container
+    # resources:
+    #   requests:
+    #     cpu: 100m
+    #     memory: 256Mi
+    #   limits:
+    #     cpu: 500m
+    #     memory: 512Mi
+
+    # -- Additional network attachments (Multus)
+    # networkAttachments:
+    #   - internalapi
+
+    # -- Node selector for Keystone pods
+    # nodeSelector: {}
+
+    # -- Override the generated Service or Route
+    # override:
+    #   service:
+    #     public: {}
+    #     internal: {}

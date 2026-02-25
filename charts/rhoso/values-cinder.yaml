@@ -1,0 +1,83 @@
+# =============================================================================
+# Cinder - Block Storage Service
+# Ref: cinderv1.CinderSpecCore
+# Enabled by default
+# =============================================================================
+
+cinder:
+  enabled: true
+
+  # -- APIOverride: customize the public route or TLS for the Cinder API
+  apiOverride:
+    route: {}
+    # tls:
+    #   secretName: cinder-public-tls
+
+  # -- uniquePodNames: avoids pod-name collisions in multi-cell deployments
+  # uniquePodNames: false
+
+  template:
+    # -- MariaDB instance name
+    # +kubebuilder:default=openstack
+    databaseInstance: openstack
+
+    # -- MariaDB account name for Cinder
+    # +kubebuilder:default=cinder
+    # databaseAccount: cinder
+
+    # -- Memcached instance name (required by CRD)
+    # +kubebuilder:default=memcached
+    memcachedInstance: memcached
+
+    # -- RabbitMQ cluster name for RPC messaging
+    # +kubebuilder:default=rabbitmq
+    # rabbitMqClusterName: rabbitmq
+
+    # -- Secret containing OpenStack passwords (required by CRD)
+    secret: osp-secret
+
+    # -- Custom oslo.config snippets appended to cinder.conf
+    # customServiceConfig: |
+    #   [DEFAULT]
+    #   debug = false
+
+    # -- Cinder API sub-spec
+    cinderAPI:
+      # -- Number of Cinder API replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # override:
+      #   service: {}
+      # resources: {}
+      # networkAttachments: []
+
+    # -- Cinder Scheduler sub-spec
+    cinderScheduler:
+      # -- Number of Cinder Scheduler replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # resources: {}
+
+    # -- Cinder Backup sub-spec (optional)
+    cinderBackup:
+      # -- Number of Cinder Backup replicas
+      # +kubebuilder:default=0
+      replicas: 0
+      # resources: {}
+
+    # -- Cinder Volume backends (map of named volume driver instances)
+    # cinderVolumes:
+    #   nfs:
+    #     replicas: 1
+    #     customServiceConfig: |
+    #       [nfs]
+    #       volume_driver = cinder.volume.drivers.nfs.NfsDriver
+    #       nfs_shares_config = /etc/cinder/nfs_shares
+    #       nfs_snapshot_support = true
+
+    # -- Node selector for all Cinder pods
+    # nodeSelector: {}
+
+  # -- ApplicationCredential config (optional)
+  # applicationCredential:
+  #   enabled: false

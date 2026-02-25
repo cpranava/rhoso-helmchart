@@ -1,0 +1,99 @@
+# =============================================================================
+# OVN - Open Virtual Network
+# Ref: OvnSection with sub-resources:
+#   - OVNDBCluster (map): ovnnorthd_types / ovndbcluster_types
+#   - OVNNorthd:          ovnnorthd_types
+#   - OVNController:      ovncontroller_types
+# Enabled by default
+# =============================================================================
+
+ovn:
+  enabled: true
+
+  template:
+
+    # -------------------------------------------------------------------------
+    # OVN DB Clusters (map-based — supports multiple DB cluster instances)
+    # Exactly two clusters are required: one NB (northbound) and one SB (southbound)
+    # -------------------------------------------------------------------------
+    ovnDBCluster:
+
+      # Northbound DB cluster
+      ovndbcluster-nb:
+        # -- DB type: NB (northbound) or SB (southbound)
+        # +kubebuilder:default=NB
+        dbType: NB
+
+        # -- Number of OVN DB replicas (should be 1 or 3)
+        # +kubebuilder:default=1
+        replicas: 1
+
+        # -- Storage request for the DB PVC
+        # +kubebuilder:default="10G"
+        storageRequest: "10G"
+
+        # -- StorageClass override (falls back to global)
+        # storageClass: ""
+
+        # -- Additional network attachments
+        # networkAttachments:
+        #   - internalapi
+
+        # -- Node selector override
+        # nodeSelector: {}
+
+      # Southbound DB cluster
+      ovndbcluster-sb:
+        # +kubebuilder:default=SB
+        dbType: SB
+        replicas: 1
+        storageRequest: "10G"
+        # storageClass: ""
+        # networkAttachments:
+        #   - internalapi
+        # nodeSelector: {}
+
+    # -------------------------------------------------------------------------
+    # OVN Northd
+    # -------------------------------------------------------------------------
+    ovnNorthd:
+      # -- Number of ovn-northd replicas
+      # +kubebuilder:default=1
+      replicas: 1
+
+      # -- Resource requests/limits
+      # resources:
+      #   requests:
+      #     cpu: 100m
+      #     memory: 256Mi
+      #   limits:
+      #     cpu: 500m
+      #     memory: 512Mi
+
+      # -- Additional network attachments
+      # networkAttachments:
+      #   - internalapi
+
+    # -------------------------------------------------------------------------
+    # OVN Controller (DaemonSet on compute nodes)
+    # -------------------------------------------------------------------------
+    ovnController:
+      # -- External network interface for OVN external traffic
+      # externalIDS:
+      #   ovnEncapType: geneve
+      #   ovnBridge: br-int
+      #   ovnBridgeMappings: "datacentre:br-ex"
+      #   ovnRemoteProbeInterval: "10000"
+      #   ovnOfProbeInterval: "180000"
+      #   enableChassisAsGateway: "true"
+
+      # -- NIC configuration for the OVN controller pods
+      # nicMappings:
+      #   datacentre: br-ex
+
+      # -- Node selector (defaults to all nodes; scope to compute nodes here)
+      # nodeSelector:
+      #   kubernetes.io/hostname: compute-0
+
+      # -- Resource requests/limits
+      # resources: {}

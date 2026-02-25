@@ -1,0 +1,79 @@
+# =============================================================================
+# Watcher - Resource Optimization Service
+# Ref: watcherv1.WatcherSpecCore
+# Disabled by default
+# Note: CRD field names differ from other services:
+#   watcherAPI         → apiServiceTemplate
+#   watcherApplier     → applierServiceTemplate
+#   watcherDecisionEngine → decisionengineServiceTemplate
+# =============================================================================
+
+watcher:
+  enabled: false
+
+  # -- apiOverride: customize the public route or TLS for Watcher API
+  apiOverride:
+    route: {}
+    # tls:
+    #   secretName: watcher-public-tls
+
+  template:
+    # -- MariaDB instance name
+    # +kubebuilder:default=openstack
+    databaseInstance: openstack
+
+    # -- MariaDB account name
+    # +kubebuilder:default=watcher
+    # databaseAccount: watcher
+
+    # -- Memcached instance name
+    # +kubebuilder:default=memcached
+    # memcachedInstance: memcached
+
+    # -- RabbitMQ cluster name
+    # +kubebuilder:default=rabbitmq
+    # rabbitMqClusterName: rabbitmq
+
+    # -- Secret containing OpenStack passwords
+    # secret: osp-secret
+
+    # -- Custom oslo.config snippets appended to watcher.conf
+    # customServiceConfig: |
+    #   [DEFAULT]
+    #   debug = false
+
+    # -- Watcher API sub-spec (CRD field: apiServiceTemplate)
+    apiServiceTemplate:
+      # -- Number of Watcher API replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # override:
+      #   service: {}
+      # resources: {}
+      # networkAttachments: []
+
+    # -- Watcher Applier sub-spec (CRD field: applierServiceTemplate)
+    applierServiceTemplate:
+      # -- Number of Watcher Applier replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # resources: {}
+
+    # -- Watcher Decision Engine sub-spec (CRD field: decisionengineServiceTemplate)
+    decisionengineServiceTemplate:
+      # -- Number of Watcher Decision Engine replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # resources: {}
+
+    # -- DB purge cron job settings (optional)
+    # dbPurge:
+    #   schedule: "0 1 * * *"   # default: daily at 01:00
+    #   purgeAge: 90             # minimum age in days before soft-deleted records are removed
+
+    # -- Node selector for all Watcher pods
+    # nodeSelector: {}
+
+  # -- ApplicationCredential config (optional)
+  # applicationCredential:
+  #   enabled: false

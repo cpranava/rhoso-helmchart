@@ -1,0 +1,57 @@
+# =============================================================================
+# Horizon - OpenStack Dashboard
+# Ref: horizonv1.HorizonSpecCore
+# Disabled by default
+# =============================================================================
+
+horizon:
+  enabled: false
+
+  # -- apiOverride: customize the public route or TLS for Horizon
+  apiOverride:
+    route: {}
+    # tls:
+    #   secretName: horizon-public-tls
+
+  template:
+    # -- Number of Horizon replicas
+    # +kubebuilder:default=1
+    # +kubebuilder:validation:Maximum=32
+    replicas: 1
+
+    # -- Secret containing the Horizon SECRET_KEY (required by CRD)
+    secret: osp-secret
+
+    # -- Memcached instance name (required by CRD)
+    # +kubebuilder:default=memcached
+    memcachedInstance: memcached
+
+    # -- Custom Python config snippets added to local_settings.d/9999_custom_settings.py
+    # customServiceConfig: |
+    #   OPENSTACK_API_VERSIONS = {
+    #     "identity": 3,
+    #   }
+
+    # -- Override specific config files (e.g. local_settings.py)
+    # defaultConfigOverwrite:
+    #   custom_local_settings.py: |
+    #     # additional settings
+
+    # -- Resource requests/limits
+    # resources:
+    #   requests:
+    #     cpu: 100m
+    #     memory: 256Mi
+    #   limits:
+    #     cpu: 500m
+    #     memory: 1Gi
+
+    # -- Additional network attachments (Multus)
+    # networkAttachments:
+    #   - internalapi
+
+    # -- Node selector for Horizon pods
+    # nodeSelector: {}
+
+    # -- Do not delete completed jobs (useful for debugging)
+    # preserveJobs: false

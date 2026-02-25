@@ -1,0 +1,104 @@
+# =============================================================================
+# Swift - Object Storage Service
+# Ref: swiftv1.SwiftSpecCore
+# Enabled by default
+# Sub-components: swiftRing, swiftStorage, swiftProxy
+# =============================================================================
+
+swift:
+  enabled: true
+
+  # -- proxyOverride: customize the public route or TLS for the Swift proxy
+  proxyOverride:
+    route: {}
+    # tls:
+    #   secretName: swift-public-tls
+
+  template:
+    # -- StorageClass for Swift storage PVCs (also falls back to global)
+    # +kubebuilder:default=""
+    storageClass: ""
+
+    # -- Memcached instance name (required by CRD)
+    # +kubebuilder:default=memcached
+    memcachedInstance: memcached
+
+    # -- Additional network attachments (Multus)
+    # networkAttachments:
+    #   - internalapi
+
+    # -- Ring ConfigMaps (default list used by the operator)
+    # +kubebuilder:default={swift-ring-files}
+    # ringConfigMaps:
+    #   - swift-ring-files
+
+    # -- Node selector for all Swift pods
+    # nodeSelector: {}
+
+    # -------------------------------------------------------------------------
+    # Swift Ring (manages ring files, runs as a Job)
+    # -------------------------------------------------------------------------
+    swiftRing:
+      # -- Number of Swift ring replicas (data copies)
+      # +kubebuilder:default=1
+      ringReplicas: 1
+
+      # -- 2^partPower = number of ring partitions (required by CRD)
+      # +kubebuilder:default=10
+      partPower: 10
+
+      # -- Minimum hours before a partition can be moved again (required by CRD)
+      # +kubebuilder:default=1
+      minPartHours: 1
+
+    # -------------------------------------------------------------------------
+    # Swift Storage (StatefulSet of storage nodes)
+    # -------------------------------------------------------------------------
+    swiftStorage:
+      # -- Number of Swift storage replicas (nodes)
+      # +kubebuilder:default=1
+      replicas: 1
+
+      # -- Storage request per Swift storage PVC
+      # +kubebuilder:default="10Gi"
+      storageRequest: "10Gi"
+
+      # -- StorageClass override for storage PVCs (required by CRD)
+      storageClass: ""
+
+      # -- Memcached instance name (required by CRD)
+      memcachedInstance: memcached
+
+      # -- Resource requests/limits for storage containers
+      # resources: {}
+
+    # -------------------------------------------------------------------------
+    # Swift Proxy (handles API requests, routes to storage)
+    # -------------------------------------------------------------------------
+    swiftProxy:
+      # -- Number of Swift proxy replicas
+      # +kubebuilder:default=2
+      replicas: 2
+
+      # -- Secret containing OpenStack passwords (required by CRD)
+      secret: osp-secret
+
+      # -- Service user for Swift (required by CRD)
+      # +kubebuilder:default=swift
+      serviceUser: swift
+
+      # -- Memcached instance name (required by CRD)
+      memcachedInstance: memcached
+
+      # -- Resource requests/limits for the proxy container
+      # resources:
+      #   requests:
+      #     cpu: 100m
+      #     memory: 256Mi
+      #   limits:
+      #     cpu: 500m
+      #     memory: 512Mi
+
+  # -- ApplicationCredential config (optional)
+  # applicationCredential:
+  #   enabled: false

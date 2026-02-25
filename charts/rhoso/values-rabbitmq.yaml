@@ -1,0 +1,45 @@
+# =============================================================================
+# RabbitMQ - Message Bus
+# Ref: rabbitmqv1.RabbitMqClusterSpecCore (via RabbitmqSection)
+# Enabled by default
+# Note: map-based — each key is a named RabbitMQ cluster
+#       Separate clusters for RPC (messagingBus) and notifications
+#       (notificationsBus) can be defined here; reference them via the global
+#       .Values.messagingBus / .Values.notificationsBus in values.yaml
+# =============================================================================
+
+rabbitmq:
+  enabled: true
+
+  # templates: map of named RabbitMQ cluster instances
+  templates:
+
+    # Primary RPC message bus used by most services
+    rabbitmq:
+      # -- Number of RabbitMQ replicas
+      # +kubebuilder:default=1
+      replicas: 1
+
+      # -- Resource requests/limits for the RabbitMQ container
+      # resources:
+      #   requests:
+      #     cpu: 500m
+      #     memory: 512Mi
+      #   limits:
+      #     cpu: 1000m
+      #     memory: 1Gi
+
+      # -- Override the generated Service (e.g. annotations)
+      # override:
+      #   service: {}
+
+      # -- Node selector override for this cluster
+      # nodeSelector: {}
+
+      # -- TLS settings for intra-cluster communication
+      # tls:
+      #   secretName: rabbitmq-tls
+
+    # Optional: dedicated notifications cluster
+    # rabbitmq-cell1:
+    #   replicas: 1

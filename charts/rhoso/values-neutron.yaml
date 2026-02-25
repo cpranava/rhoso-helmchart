@@ -1,0 +1,62 @@
+# =============================================================================
+# Neutron - Networking Service
+# Ref: neutronv1.NeutronAPISpecCore
+# Enabled by default
+# =============================================================================
+
+neutron:
+  enabled: true
+
+  # -- APIOverride: customize the public route or TLS for Neutron API
+  apiOverride:
+    route: {}
+    # tls:
+    #   secretName: neutron-public-tls
+
+  template:
+    # -- Number of Neutron API replicas
+    # +kubebuilder:default=1
+    replicas: 1
+
+    # -- MariaDB instance name
+    # +kubebuilder:default=openstack
+    databaseInstance: openstack
+
+    # -- Memcached instance name (required by CRD)
+    # +kubebuilder:default=memcached
+    memcachedInstance: memcached
+
+    # -- RabbitMQ cluster name for RPC messaging
+    # +kubebuilder:default=rabbitmq
+    # rabbitMqClusterName: rabbitmq
+
+    # -- Secret containing OpenStack passwords (required by CRD)
+    secret: osp-secret
+
+    # -- Custom oslo.config snippets appended to neutron.conf
+    # customServiceConfig: |
+    #   [DEFAULT]
+    #   debug = false
+    #   [ovn]
+    #   ovn_nb_connection = tcp:ovndbcluster-nb-db-svc.openstack.svc:6641
+    #   ovn_sb_connection = tcp:ovndbcluster-sb-db-svc.openstack.svc:6642
+
+    # -- Resource requests/limits
+    # resources:
+    #   requests:
+    #     cpu: 100m
+    #     memory: 256Mi
+    #   limits:
+    #     cpu: 500m
+    #     memory: 1Gi
+
+    # -- Additional network attachments (Multus)
+    # networkAttachments:
+    #   - internalapi
+
+    # -- Node selector for Neutron API pods
+    # nodeSelector: {}
+
+  # -- ApplicationCredential config (optional)
+  # applicationCredential:
+  #   enabled: false

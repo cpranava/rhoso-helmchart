@@ -1,0 +1,71 @@
+# =============================================================================
+# Manila - Shared Filesystem Service
+# Ref: manilav1.ManilaSpecCore
+# Disabled by default
+# =============================================================================
+
+manila:
+  enabled: false
+
+  # -- apiOverride: customize the public route or TLS for Manila API
+  apiOverride:
+    route: {}
+    # tls:
+    #   secretName: manila-public-tls
+
+  template:
+    # -- MariaDB instance name
+    # +kubebuilder:default=openstack
+    databaseInstance: openstack
+
+    # -- Memcached instance name (required by CRD)
+    # +kubebuilder:default=memcached
+    memcachedInstance: memcached
+
+    # -- RabbitMQ cluster name
+    # +kubebuilder:default=rabbitmq
+    # rabbitMqClusterName: rabbitmq
+
+    # -- Secret containing OpenStack passwords
+    # secret: osp-secret
+
+    # -- Custom oslo.config snippets appended to manila.conf
+    # customServiceConfig: |
+    #   [DEFAULT]
+    #   debug = false
+
+    # -- Manila API sub-spec
+    manilaAPI:
+      # -- Number of Manila API replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # override:
+      #   service: {}
+      # resources: {}
+      # networkAttachments: []
+
+    # -- Manila Scheduler sub-spec
+    manilaScheduler:
+      # -- Number of Manila Scheduler replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # resources: {}
+
+    # -- Manila Share service backends (map of named share driver instances)
+    # manilaShares:
+    #   share1:
+    #     replicas: 1
+    #     customServiceConfig: |
+    #       [DEFAULT]
+    #       enabled_share_backends = cephfs
+    #       [cephfs]
+    #       driver_handles_share_servers = False
+    #       share_backend_name = cephfs
+    #       share_driver = manila.share.drivers.cephfs.driver.CephFSDriver
+
+    # -- Node selector for all Manila pods
+    # nodeSelector: {}
+
+  # -- ApplicationCredential config (optional)
+  # applicationCredential:
+  #   enabled: false

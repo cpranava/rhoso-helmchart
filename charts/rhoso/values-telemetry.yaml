@@ -1,0 +1,119 @@
+# =============================================================================
+# Telemetry - Metering, Alarming, and Observability
+# Ref: telemetryv1.TelemetrySpecCore
+# Enabled by default
+# Sub-services:
+#   - ceilometer   (metering)       — enabled by default
+#   - autoscaling  (aodh)           — disabled by default
+#   - metricStorage (Prometheus)    — disabled by default
+#   - logging                       — disabled by default
+#   - cloudkitty   (rating)         — disabled by default
+# =============================================================================
+
+telemetry:
+  enabled: true
+
+  # -------------------------------------------------------------------------
+  # API Overrides (per sub-service)
+  # -------------------------------------------------------------------------
+  # -- Aodh alarm API override
+  # aodhApiOverride:
+  #   route: {}
+
+  # -- CloudKitty rating API override
+  # cloudKittyApiOverride:
+  #   route: {}
+
+  # -- Prometheus override
+  # prometheusOverride:
+  #   route: {}
+
+  # -- Alertmanager override
+  # alertmanagerOverride:
+  #   route: {}
+
+  template:
+    # --------------------------------------------------------------------------
+    # Ceilometer — metering service (enabled by default)
+    # --------------------------------------------------------------------------
+    ceilometer:
+      enabled: true
+
+      # -- Secret containing OpenStack passwords (required by CRD)
+      secret: osp-secret
+
+      # -- Custom oslo.config snippets appended to ceilometer.conf
+      # customServiceConfig: |
+      #   [DEFAULT]
+      #   debug = false
+
+      # -- Resources for the ceilometer central agent
+      # resources: {}
+
+      # -- Additional network attachments
+      # networkAttachments: []
+
+    # --------------------------------------------------------------------------
+    # Autoscaling (Aodh) — alarm service (disabled by default)
+    # --------------------------------------------------------------------------
+    autoscaling:
+      enabled: false
+
+      # -- MariaDB instance name
+      # databaseInstance: openstack
+      # -- Memcached instance name
+      # memcachedInstance: memcached
+      # -- RabbitMQ cluster name
+      # rabbitMqClusterName: rabbitmq
+      # -- Secret containing OpenStack passwords
+      # secret: osp-secret
+
+      # -- Heat instance name used for autoscaling (required by CRD when enabled)
+      # +kubebuilder:default=heat
+      heatInstance: heat
+
+      # aodh:
+      #   replicas: 1
+      # resources: {}
+
+    # --------------------------------------------------------------------------
+    # MetricStorage (Prometheus/Alertmanager) — disabled by default
+    # --------------------------------------------------------------------------
+    metricStorage:
+      enabled: false
+
+      # -- StorageClass for Prometheus PVCs
+      # storageClass: ""
+      # -- Storage request size
+      # storageRequest: "20G"
+      # -- Prometheus scrape interval
+      # prometheusScrapeInterval: "30s"
+
+    # --------------------------------------------------------------------------
+    # Logging (Loki/Vector) — disabled by default
+    # --------------------------------------------------------------------------
+    logging:
+      enabled: false
+
+      # -- Storage request for Loki PVC
+      # storageRequest: "20G"
+      # -- StorageClass for Loki PVC
+      # storageClass: ""
+      # -- Rsyslog queue type (required by CRD)
+      # +kubebuilder:default=LinkedList
+      rsyslogQueueType: LinkedList
+
+    # --------------------------------------------------------------------------
+    # CloudKitty — rating service (disabled by default)
+    # --------------------------------------------------------------------------
+    cloudkitty:
+      enabled: false
+
+      # databaseInstance: openstack
+      # memcachedInstance: memcached
+      # rabbitMqClusterName: rabbitmq
+      # secret: osp-secret
+      # resources: {}
+
+    # -- Node selector for all Telemetry pods
+    # nodeSelector: {}

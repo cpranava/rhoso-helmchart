@@ -1,0 +1,44 @@
+RHOSO {{ .Chart.AppVersion }} has been deployed.
+
+OpenStackControlPlane: {{ include "rhoso.controlplane.name" . }}
+Namespace:             {{ .Values.namespace }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Services enabled in this deployment
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Infrastructure:
+    DNS (dnsmasq)  {{ if .Values.dns.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    Galera         {{ if .Values.galera.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    RabbitMQ       {{ if .Values.rabbitmq.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    Memcached      {{ if .Values.memcached.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    OVN            {{ if .Values.ovn.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+
+  Core Services:
+    Keystone       {{ if .Values.keystone.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    Placement      {{ if .Values.placement.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    Glance         {{ if .Values.glance.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    Cinder         {{ if .Values.cinder.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    Neutron        {{ if .Values.neutron.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    Nova           {{ if .Values.nova.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    Swift          {{ if .Values.swift.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    Barbican       {{ if .Values.barbican.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    Telemetry      {{ if .Values.telemetry.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+
+  Optional Services:
+    Heat           {{ if .Values.heat.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    Ironic         {{ if .Values.ironic.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    Manila         {{ if .Values.manila.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    Horizon        {{ if .Values.horizon.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    Octavia        {{ if .Values.octavia.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    Designate      {{ if .Values.designate.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    Redis          {{ if .Values.redis.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+    Watcher        {{ if .Values.watcher.enabled }}✓ enabled{{ else }}✗ disabled{{ end }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Check deployment status
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  oc get openstackcontrolplane {{ include "rhoso.controlplane.name" . }} -n {{ .Values.namespace }}
+  oc get openstackcontrolplane {{ include "rhoso.controlplane.name" . }} -n {{ .Values.namespace }} \
+    -o jsonpath='{.status.conditions}' | jq .

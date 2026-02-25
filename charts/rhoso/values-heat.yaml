@@ -1,0 +1,75 @@
+# =============================================================================
+# Heat - Orchestration Service
+# Ref: heatv1.HeatSpecCore
+# Disabled by default
+# Note: Two API endpoints: Heat API (apiOverride) and Heat CFN API (cnfAPIOverride)
+# =============================================================================
+
+heat:
+  enabled: false
+
+  # -- apiOverride: customize the public route or TLS for Heat API
+  apiOverride:
+    route: {}
+    # tls:
+    #   secretName: heat-public-tls
+
+  # -- cnfAPIOverride: customize the public route or TLS for Heat CFN API
+  cnfAPIOverride:
+    route: {}
+    # tls:
+    #   secretName: heat-cfn-public-tls
+
+  template:
+    # -- MariaDB instance name
+    # +kubebuilder:default=openstack
+    databaseInstance: openstack
+
+    # -- Memcached instance name (required by CRD)
+    # +kubebuilder:default=memcached
+    memcachedInstance: memcached
+
+    # -- RabbitMQ cluster name
+    # +kubebuilder:default=rabbitmq
+    # rabbitMqClusterName: rabbitmq
+
+    # -- Secret containing OpenStack passwords (required by CRD)
+    secret: osp-secret
+
+    # -- Custom oslo.config snippets appended to heat.conf
+    # customServiceConfig: |
+    #   [DEFAULT]
+    #   debug = false
+
+    # -- Heat API sub-spec
+    heatAPI:
+      # -- Number of Heat API replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # override:
+      #   service: {}
+      # resources: {}
+      # networkAttachments: []
+
+    # -- Heat CFN API sub-spec
+    heatCfnAPI:
+      # -- Number of Heat CFN API replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # override:
+      #   service: {}
+      # resources: {}
+
+    # -- Heat Engine sub-spec
+    heatEngine:
+      # -- Number of Heat Engine replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # resources: {}
+
+    # -- Node selector for all Heat pods
+    # nodeSelector: {}
+
+  # -- ApplicationCredential config (optional)
+  # applicationCredential:
+  #   enabled: false

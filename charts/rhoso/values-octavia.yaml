@@ -1,0 +1,134 @@
+# =============================================================================
+# Octavia - Load Balancer Service
+# Ref: octaviav1.OctaviaSpecCore
+# Disabled by default
+# Note: Requires a Redis instance (octavia-redis) and OVN networking.
+#       Enable redis (values-redis.yaml) when enabling Octavia.
+# =============================================================================
+
+octavia:
+  enabled: false
+
+  # -- apiOverride: customize the public route or TLS for Octavia API
+  apiOverride:
+    route: {}
+    # tls:
+    #   secretName: octavia-public-tls
+
+  template:
+    # -- MariaDB instance name (required by CRD)
+    # +kubebuilder:default=openstack
+    databaseInstance: openstack
+
+    # -- MariaDB account name for Octavia
+    # +kubebuilder:default=octavia
+    # databaseAccount: octavia
+
+    # -- Persistence database account name
+    # +kubebuilder:default=octavia-persistence
+    # persistenceDatabaseAccount: octavia-persistence
+
+    # -- RabbitMQ cluster name
+    # +kubebuilder:default=rabbitmq
+    # rabbitMqClusterName: rabbitmq
+
+    # -- Secret containing OpenStack passwords (required by CRD)
+    secret: osp-secret
+
+    # -- Redis instance name for Octavia jobboard
+    # +kubebuilder:default=octavia-redis
+    # redisServiceName: octavia-redis
+
+    # -- OpenStack tenant/project that controls Octavia resources
+    # +kubebuilder:default=service
+    # tenantName: service
+
+    # -- Octavia management network attachment name (required by CRD)
+    # +kubebuilder:default=octavia
+    octaviaNetworkAttachment: octavia
+
+    # -- Apache container image (required by CRD; set by operator from RELATED_IMAGE env)
+    apacheContainerImage: registry.redhat.io/ubi9/httpd-24:latest
+
+    # -- Amphora image reference (optional — required for Amphora provider)
+    # amphoraImageContainerImage: ""
+
+    # -- API timeout in seconds
+    # +kubebuilder:default=120
+    # apiTimeout: 120
+
+    # -- Custom oslo.config snippets
+    # customServiceConfig: |
+    #   [DEFAULT]
+    #   debug = false
+
+    # -- Octavia API sub-spec
+    octaviaAPI:
+      # -- Number of Octavia API replicas
+      # +kubebuilder:default=1
+      replicas: 1
+      # -- DB instance for sub-resource (inherits from parent)
+      databaseInstance: openstack
+      # -- Secret for sub-resource (inherits from parent)
+      secret: osp-secret
+      # -- ServiceAccount (managed by operator)
+      serviceAccount: octavia
+      # override:
+      #   service: {}
+      # resources: {}
+      # networkAttachments: []
+
+    # -- Octavia Housekeeping agent
+    octaviaHousekeeping:
+      replicas: 1
+      databaseInstance: openstack
+      secret: osp-secret
+      serviceAccount: octavia
+      # +kubebuilder:default=housekeeping
+      role: housekeeping
+      # resources: {}
+
+    # -- Octavia Health Manager agent
+    octaviaHealthManager:
+      replicas: 1
+      databaseInstance: openstack
+      secret: osp-secret
+      serviceAccount: octavia
+      # +kubebuilder:default=health_manager
+      role: health_manager
+      # networkAttachments:
+      #   - octavia
+      # resources: {}
+
+    # -- Octavia Worker agent
+    octaviaWorker:
+      replicas: 1
+      databaseInstance: openstack
+      secret: osp-secret
+      serviceAccount: octavia
+      # +kubebuilder:default=worker
+      role: worker
+      # resources: {}
+
+    # -- Octavia Rsyslog (amphora log collection)
+    # octaviaRsyslog:
+    #   replicas: 1
+    #   resources: {}
+
+    # -- Lb management network configuration
+    lbMgmtNetwork:
+      # -- Whether octavia-operator manages the Neutron mgmt network
+      # +kubebuilder:default=true
+      manageLbMgmtNetworks: true
+      # -- Whether to create the default lb mgmt network
+      # +kubebuilder:default=true
+      createDefaultLbMgmtNetwork: true
+      # lbMgmtRouterGateway: ""
+      # availabilityZones: []
+
+    # -- Node selector for all Octavia pods
+    # nodeSelector: {}
+
+  # -- ApplicationCredential config (optional)
+  # applicationCredential:
+  #   enabled: false
