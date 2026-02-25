@@ -1,0 +1,22 @@
+apiVersion: v2
+name: rhoso
+description: >
+  Helm chart for Red Hat OpenStack Services on OpenShift (RHOSO).
+  Renders an OpenStackControlPlane CR with per-service configuration files,
+  designed for integration with Red Hat Validated Patterns.
+type: application
+version: 0.1.0
+appVersion: "18.0"
+keywords:
+  - openstack
+  - rhoso
+  - openshift
+  - gitops
+  - validated-patterns
+home: https://github.com/openstack-k8s-operators/openstack-operator
+sources:
+  - https://github.com/openstack-k8s-operators/openstack-operator
+maintainers:
+  - name: RHOSO Team
+annotations:
+  artifacthub.io/category: integration-delivery

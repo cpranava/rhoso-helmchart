@@ -1,0 +1,88 @@
+apiVersion: core.openstack.org/v1beta1
+kind: OpenStackControlPlane
+metadata:
+  name: {{ include "rhoso.controlplane.name" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "rhoso.labels" . | nindent 4 }}
+spec:
+  secret: {{ .Values.secret }}
+  storageClass: {{ .Values.storageClass }}
+
+  {{- with .Values.nodeSelector }}
+  nodeSelector:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+
+  {{- with .Values.extraMounts }}
+  extraMounts:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+
+  {{- with .Values.topologyRef }}
+  topologyRef:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+
+  {{- with .Values.messagingBus }}
+  messagingBus:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+
+  {{- with .Values.notificationsBus }}
+  notificationsBus:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+
+  {{- with .Values.applicationCredential }}
+  applicationCredential:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+
+  # ---------------------------------------------------------------------------
+  # TLS
+  # ---------------------------------------------------------------------------
+  {{- include "rhoso.tls" . | nindent 2 }}
+
+  # ---------------------------------------------------------------------------
+  # Infrastructure Services
+  # ---------------------------------------------------------------------------
+  {{- include "rhoso.dns" . | nindent 2 }}
+  {{- include "rhoso.galera" . | nindent 2 }}
+  {{- include "rhoso.rabbitmq" . | nindent 2 }}
+  {{- include "rhoso.memcached" . | nindent 2 }}
+  {{- include "rhoso.ovn" . | nindent 2 }}
+
+  # ---------------------------------------------------------------------------
+  # Core OpenStack Services
+  # ---------------------------------------------------------------------------
+  {{- include "rhoso.keystone" . | nindent 2 }}
+  {{- include "rhoso.placement" . | nindent 2 }}
+  {{- include "rhoso.glance" . | nindent 2 }}
+  {{- include "rhoso.cinder" . | nindent 2 }}
+  {{- include "rhoso.neutron" . | nindent 2 }}
+  {{- include "rhoso.nova" . | nindent 2 }}
+  {{- include "rhoso.swift" . | nindent 2 }}
+  {{- include "rhoso.barbican" . | nindent 2 }}
+
+  # ---------------------------------------------------------------------------
+  # Optional Services (disabled by default)
+  # ---------------------------------------------------------------------------
+  {{- include "rhoso.heat" . | nindent 2 }}
+  {{- include "rhoso.ironic" . | nindent 2 }}
+  {{- include "rhoso.manila" . | nindent 2 }}
+  {{- include "rhoso.horizon" . | nindent 2 }}
+  {{- include "rhoso.octavia" . | nindent 2 }}
+  {{- include "rhoso.designate" . | nindent 2 }}
+  {{- include "rhoso.redis" . | nindent 2 }}
+  {{- include "rhoso.watcher" . | nindent 2 }}
+
+  # ---------------------------------------------------------------------------
+  # Telemetry & Observability
+  # ---------------------------------------------------------------------------
+  {{- include "rhoso.telemetry" . | nindent 2 }}
+
+  # ---------------------------------------------------------------------------
+  # OpenStack Client
+  # ---------------------------------------------------------------------------
+  {{- include "rhoso.openstackclient" . | nindent 2 }}

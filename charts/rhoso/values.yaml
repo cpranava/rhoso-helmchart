@@ -1,0 +1,146 @@
+# =============================================================================
+# RHOSO Helm Chart - Global Values
+# =============================================================================
+# Per-service configuration lives in values-<service>.yaml files.
+# This file contains global/shared settings and service enable/disable flags.
+
+# -- Name override for the OpenStackControlPlane CR
+nameOverride: ""
+
+# -- Namespace to deploy into
+namespace: openstack
+
+# -- Required: name of the Secret containing admin credentials
+# Must exist prior to deployment (e.g. created via Vault / External Secrets)
+secret: osp-secret
+
+# -- Required: StorageClass to use for PVCs
+storageClass: local-storage
+
+# -- Optional: nodeSelector for all control plane services
+nodeSelector: {}
+
+# =============================================================================
+# TLS Configuration
+# =============================================================================
+tls:
+  ingress:
+    enabled: true
+    ca:
+      duration: "87600h"
+    cert:
+      duration: "43800h"
+  podLevel:
+    enabled: true
+    internal:
+      ca:
+        duration: "87600h"
+      cert:
+        duration: "43800h"
+    libvirt:
+      ca:
+        duration: "87600h"
+      cert:
+        duration: "43800h"
+    ovn:
+      ca:
+        duration: "87600h"
+      cert:
+        duration: "43800h"
+
+# =============================================================================
+# Global ApplicationCredential configuration
+# Both this AND the per-service applicationCredential must be enabled
+# =============================================================================
+applicationCredential:
+  enabled: false
+  expirationDays: 730
+  gracePeriodDays: 364
+  roles:
+    - admin
+    - service
+  unrestricted: false
+
+# =============================================================================
+# Global messaging bus configuration (RPC)
+# Individual services can override via their own template.messagingBus
+# =============================================================================
+messagingBus: {}
+# example:
+#   username: default_user
+#   vhost: /
+#   cluster: rabbitmq
+
+# =============================================================================
+# Global notifications bus configuration
+# =============================================================================
+notificationsBus: {}
+
+# =============================================================================
+# Extra mounts - propagated to all operators that accept it
+# =============================================================================
+extraMounts: []
+
+# =============================================================================
+# Topology reference
+# =============================================================================
+topologyRef: {}
+
+# =============================================================================
+# Service Enable/Disable Flags (defaults mirror upstream operator defaults)
+# =============================================================================
+# Services enabled by default (upstream default: true)
+dns:
+  enabled: true
+keystone:
+  enabled: true
+placement:
+  enabled: true
+glance:
+  enabled: true
+cinder:
+  enabled: true
+galera:
+  enabled: true
+rabbitmq:
+  enabled: true
+memcached:
+  enabled: true
+ovn:
+  enabled: true
+neutron:
+  enabled: true
+nova:
+  enabled: true
+telemetry:
+  enabled: true
+swift:
+  enabled: true
+barbican:
+  enabled: true
+
+# Services disabled by default (upstream default: false)
+heat:
+  enabled: false
+ironic:
+  enabled: false
+manila:
+  enabled: false
+horizon:
+  enabled: false
+octavia:
+  enabled: false
+designate:
+  enabled: false
+redis:
+  enabled: false
+watcher:
+  enabled: false
+
+# OpenStackClient is always deployed (no enabled flag upstream)
+openstackclient:
+  template:
+    # Name of the ConfigMap containing clouds.yaml (operator default: openstack-config)
+    openStackConfigMap: openstack-config
+    # Name of the Secret containing secure.yaml (operator default: openstack-config-secret)
+    openStackConfigSecret: openstack-config-secret
