@@ -1,0 +1,1158 @@
+{
+  "summary": {
+    "services_with_zero_missing_keys": 24,
+    "services_with_missing_keys": 0,
+    "total_missing_key_count": 0
+  },
+  "services": {
+    "dns": {
+      "top_level_service_keys": [
+        "enabled",
+        "template"
+      ],
+      "template_level_keys": [
+        "replicas"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "enabled",
+        "template",
+        "template.externalEndpoints",
+        "template.extraSpec",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.options",
+        "template.override",
+        "template.replicas",
+        "template.resources",
+        "template.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "template",
+        "template.externalEndpoints",
+        "template.extraSpec",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.options",
+        "template.override",
+        "template.resources",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": []
+    },
+    "galera": {
+      "top_level_service_keys": [
+        "enabled",
+        "templates"
+      ],
+      "template_level_keys": [],
+      "map_instance_keys": [
+        "replicas",
+        "storageRequest",
+        "storageClass"
+      ],
+      "explicit_keys": [
+        "enabled",
+        "templates",
+        "templates.<instance>.containerImage",
+        "templates.<instance>.extraSpec",
+        "templates.<instance>.nodeSelector",
+        "templates.<instance>.replicas",
+        "templates.<instance>.resources",
+        "templates.<instance>.secret",
+        "templates.<instance>.storageClass",
+        "templates.<instance>.storageRequest",
+        "templates.<instance>.tls",
+        "templates.<instance>.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "templates.<instance>.extraSpec",
+        "templates.<instance>.nodeSelector",
+        "templates.<instance>.resources",
+        "templates.<instance>.tls",
+        "templates.<instance>.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": [
+        "Map-based service: coverage evaluated against templates.<instance> keys from sample instance in values file."
+      ]
+    },
+    "rabbitmq": {
+      "top_level_service_keys": [
+        "enabled",
+        "templates"
+      ],
+      "template_level_keys": [],
+      "map_instance_keys": [
+        "replicas"
+      ],
+      "explicit_keys": [
+        "enabled",
+        "templates",
+        "templates.<instance>.additionalConfig",
+        "templates.<instance>.advancedConfig",
+        "templates.<instance>.extraSpec",
+        "templates.<instance>.nodeSelector",
+        "templates.<instance>.override",
+        "templates.<instance>.replicas",
+        "templates.<instance>.resources",
+        "templates.<instance>.tls",
+        "templates.<instance>.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "templates",
+        "templates.<instance>.extraSpec",
+        "templates.<instance>.nodeSelector",
+        "templates.<instance>.override",
+        "templates.<instance>.resources",
+        "templates.<instance>.tls",
+        "templates.<instance>.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": [
+        "Map-based service: coverage evaluated against templates.<instance> keys from sample instance in values file."
+      ]
+    },
+    "memcached": {
+      "top_level_service_keys": [
+        "enabled",
+        "templates"
+      ],
+      "template_level_keys": [],
+      "map_instance_keys": [
+        "replicas"
+      ],
+      "explicit_keys": [
+        "enabled",
+        "templates",
+        "templates.<instance>.extraSpec",
+        "templates.<instance>.maxMemoryMB",
+        "templates.<instance>.nodeSelector",
+        "templates.<instance>.replicas",
+        "templates.<instance>.resources",
+        "templates.<instance>.tls",
+        "templates.<instance>.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "templates.<instance>.extraSpec",
+        "templates.<instance>.nodeSelector",
+        "templates.<instance>.resources",
+        "templates.<instance>.tls",
+        "templates.<instance>.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": [
+        "Map-based service: coverage evaluated against templates.<instance> keys from sample instance in values file."
+      ]
+    },
+    "keystone": {
+      "top_level_service_keys": [
+        "enabled",
+        "apiOverride",
+        "template"
+      ],
+      "template_level_keys": [
+        "replicas",
+        "databaseInstance",
+        "memcachedInstance",
+        "secret"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "apiOverride",
+        "applicationCredential",
+        "enabled",
+        "template",
+        "template.customServiceConfig",
+        "template.databaseAccount",
+        "template.databaseInstance",
+        "template.defaultConfigOverwrite",
+        "template.extraSpec",
+        "template.memcachedInstance",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.override",
+        "template.replicas",
+        "template.resources",
+        "template.secret",
+        "template.serviceAccount",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "apiOverride",
+        "applicationCredential",
+        "template",
+        "template.defaultConfigOverwrite",
+        "template.extraSpec",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.override",
+        "template.resources",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": []
+    },
+    "placement": {
+      "top_level_service_keys": [
+        "enabled",
+        "apiOverride",
+        "template"
+      ],
+      "template_level_keys": [
+        "replicas",
+        "databaseInstance",
+        "secret"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "apiOverride",
+        "applicationCredential",
+        "enabled",
+        "template",
+        "template.customServiceConfig",
+        "template.databaseAccount",
+        "template.databaseInstance",
+        "template.defaultConfigOverwrite",
+        "template.extraSpec",
+        "template.memcachedInstance",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.override",
+        "template.replicas",
+        "template.resources",
+        "template.secret",
+        "template.serviceAccount",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "apiOverride",
+        "applicationCredential",
+        "template",
+        "template.defaultConfigOverwrite",
+        "template.extraSpec",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.override",
+        "template.resources",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": []
+    },
+    "glance": {
+      "top_level_service_keys": [
+        "enabled",
+        "apiOverrides",
+        "template"
+      ],
+      "template_level_keys": [
+        "storageRequest",
+        "databaseInstance",
+        "memcachedInstance",
+        "secret",
+        "keystoneEndpoint",
+        "imageCache",
+        "glanceAPIs"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "apiOverrides",
+        "applicationCredential",
+        "enabled",
+        "template",
+        "template.customServiceConfig",
+        "template.databaseAccount",
+        "template.databaseInstance",
+        "template.extraSpec",
+        "template.glanceAPIs",
+        "template.imageCache",
+        "template.keystoneEndpoint",
+        "template.memcachedInstance",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.resources",
+        "template.secret",
+        "template.serviceAccount",
+        "template.storageClass",
+        "template.storageRequest",
+        "template.tls",
+        "template.topologyRef",
+        "uniquePodNames"
+      ],
+      "nested_toYaml_coverage_points": [
+        "apiOverrides",
+        "applicationCredential",
+        "template.extraSpec",
+        "template.glanceAPIs",
+        "template.imageCache",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.resources",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": []
+    },
+    "cinder": {
+      "top_level_service_keys": [
+        "enabled",
+        "apiOverride",
+        "template"
+      ],
+      "template_level_keys": [
+        "databaseInstance",
+        "memcachedInstance",
+        "secret",
+        "cinderAPI",
+        "cinderScheduler",
+        "cinderBackup"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "apiOverride",
+        "applicationCredential",
+        "enabled",
+        "template",
+        "template.cinderAPI",
+        "template.cinderBackup",
+        "template.cinderScheduler",
+        "template.cinderVolumes",
+        "template.customServiceConfig",
+        "template.databaseAccount",
+        "template.databaseInstance",
+        "template.extraSpec",
+        "template.memcachedInstance",
+        "template.nodeSelector",
+        "template.rabbitMqClusterName",
+        "template.secret",
+        "template.serviceAccount",
+        "template.tls",
+        "template.topologyRef",
+        "uniquePodNames"
+      ],
+      "nested_toYaml_coverage_points": [
+        "apiOverride",
+        "applicationCredential",
+        "template",
+        "template.cinderAPI",
+        "template.cinderBackup",
+        "template.cinderScheduler",
+        "template.cinderVolumes",
+        "template.extraSpec",
+        "template.nodeSelector",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": []
+    },
+    "ovn": {
+      "top_level_service_keys": [
+        "enabled",
+        "template"
+      ],
+      "template_level_keys": [
+        "ovnDBCluster",
+        "ovnNorthd",
+        "ovnController"
+      ],
+      "map_instance_keys": [
+        "dbType",
+        "replicas",
+        "storageRequest"
+      ],
+      "explicit_keys": [
+        "enabled",
+        "template",
+        "template.externalIDS",
+        "template.extraSpec",
+        "template.networkAttachments",
+        "template.nicMappings",
+        "template.nodeSelector",
+        "template.ovnController",
+        "template.ovnDBCluster",
+        "template.ovnDBCluster.<instance>.dbType",
+        "template.ovnDBCluster.<instance>.extraSpec",
+        "template.ovnDBCluster.<instance>.networkAttachments",
+        "template.ovnDBCluster.<instance>.nodeSelector",
+        "template.ovnDBCluster.<instance>.replicas",
+        "template.ovnDBCluster.<instance>.storageClass",
+        "template.ovnDBCluster.<instance>.storageRequest",
+        "template.ovnDBCluster.<instance>.topologyRef",
+        "template.ovnNorthd",
+        "template.replicas",
+        "template.resources",
+        "template.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "template",
+        "template.externalIDS",
+        "template.extraSpec",
+        "template.networkAttachments",
+        "template.nicMappings",
+        "template.nodeSelector",
+        "template.ovnController",
+        "template.ovnDBCluster.<instance>.extraSpec",
+        "template.ovnDBCluster.<instance>.networkAttachments",
+        "template.ovnDBCluster.<instance>.nodeSelector",
+        "template.ovnDBCluster.<instance>.topologyRef",
+        "template.ovnNorthd",
+        "template.resources",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": [
+        "Hybrid map-based structure: template.ovnDBCluster.<instance> plus explicit ovnNorthd/ovnController blocks."
+      ]
+    },
+    "neutron": {
+      "top_level_service_keys": [
+        "enabled",
+        "apiOverride",
+        "template"
+      ],
+      "template_level_keys": [
+        "replicas",
+        "databaseInstance",
+        "memcachedInstance",
+        "secret"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "apiOverride",
+        "applicationCredential",
+        "enabled",
+        "template",
+        "template.customServiceConfig",
+        "template.databaseAccount",
+        "template.databaseInstance",
+        "template.extraSpec",
+        "template.memcachedInstance",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.override",
+        "template.rabbitMqClusterName",
+        "template.replicas",
+        "template.resources",
+        "template.secret",
+        "template.serviceAccount",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "apiOverride",
+        "applicationCredential",
+        "template",
+        "template.extraSpec",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.override",
+        "template.resources",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": []
+    },
+    "nova": {
+      "top_level_service_keys": [
+        "enabled",
+        "apiOverride",
+        "template"
+      ],
+      "template_level_keys": [
+        "apiDatabaseInstance",
+        "secret",
+        "novaAPI",
+        "novaScheduler",
+        "novaMetadata",
+        "cellTemplates"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "apiOverride",
+        "applicationCredential",
+        "cellOverride",
+        "enabled",
+        "template",
+        "template.apiDatabaseInstance",
+        "template.cellTemplates",
+        "template.customServiceConfig",
+        "template.extraSpec",
+        "template.memcachedInstance",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.novaAPI",
+        "template.novaMetadata",
+        "template.novaScheduler",
+        "template.override",
+        "template.rabbitMqClusterName",
+        "template.replicas",
+        "template.resources",
+        "template.secret",
+        "template.serviceAccount",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "apiOverride",
+        "applicationCredential",
+        "cellOverride",
+        "template",
+        "template.cellTemplates",
+        "template.extraSpec",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.novaAPI",
+        "template.novaMetadata",
+        "template.novaScheduler",
+        "template.override",
+        "template.resources",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": []
+    },
+    "heat": {
+      "top_level_service_keys": [
+        "enabled",
+        "apiOverride",
+        "cnfAPIOverride",
+        "template"
+      ],
+      "template_level_keys": [
+        "databaseInstance",
+        "memcachedInstance",
+        "secret",
+        "heatAPI",
+        "heatCfnAPI",
+        "heatEngine"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "apiOverride",
+        "applicationCredential",
+        "cnfAPIOverride",
+        "enabled",
+        "template",
+        "template.customServiceConfig",
+        "template.databaseAccount",
+        "template.databaseInstance",
+        "template.extraSpec",
+        "template.heatAPI",
+        "template.heatCfnAPI",
+        "template.heatEngine",
+        "template.memcachedInstance",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.override",
+        "template.rabbitMqClusterName",
+        "template.replicas",
+        "template.resources",
+        "template.secret",
+        "template.serviceAccount",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "apiOverride",
+        "applicationCredential",
+        "cnfAPIOverride",
+        "template",
+        "template.extraSpec",
+        "template.heatAPI",
+        "template.heatCfnAPI",
+        "template.heatEngine",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.override",
+        "template.resources",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": []
+    },
+    "ironic": {
+      "top_level_service_keys": [
+        "enabled",
+        "apiOverride",
+        "inspectorOverride",
+        "template"
+      ],
+      "template_level_keys": [
+        "databaseInstance",
+        "secret",
+        "storageClass",
+        "ironicAPI",
+        "ironicConductors",
+        "ironicInspector",
+        "ironicNeutronAgent"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "apiOverride",
+        "applicationCredential",
+        "enabled",
+        "inspectorOverride",
+        "template",
+        "template.customServiceConfig",
+        "template.databaseAccount",
+        "template.databaseInstance",
+        "template.extraSpec",
+        "template.ironicAPI",
+        "template.ironicConductors",
+        "template.ironicInspector",
+        "template.ironicNeutronAgent",
+        "template.memcachedInstance",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.rabbitMqClusterName",
+        "template.rpcTransport",
+        "template.secret",
+        "template.serviceAccount",
+        "template.standalone",
+        "template.storageClass",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "apiOverride",
+        "applicationCredential",
+        "inspectorOverride",
+        "template.extraSpec",
+        "template.ironicAPI",
+        "template.ironicConductors",
+        "template.ironicInspector",
+        "template.ironicNeutronAgent",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": []
+    },
+    "manila": {
+      "top_level_service_keys": [
+        "enabled",
+        "apiOverride",
+        "template"
+      ],
+      "template_level_keys": [
+        "databaseInstance",
+        "memcachedInstance",
+        "manilaAPI",
+        "manilaScheduler"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "apiOverride",
+        "applicationCredential",
+        "enabled",
+        "template",
+        "template.customServiceConfig",
+        "template.databaseAccount",
+        "template.databaseInstance",
+        "template.extraSpec",
+        "template.manilaAPI",
+        "template.manilaScheduler",
+        "template.manilaShares",
+        "template.memcachedInstance",
+        "template.nodeSelector",
+        "template.rabbitMqClusterName",
+        "template.secret",
+        "template.serviceAccount",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "apiOverride",
+        "applicationCredential",
+        "template",
+        "template.extraSpec",
+        "template.manilaAPI",
+        "template.manilaScheduler",
+        "template.manilaShares",
+        "template.nodeSelector",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": []
+    },
+    "horizon": {
+      "top_level_service_keys": [
+        "enabled",
+        "apiOverride",
+        "template"
+      ],
+      "template_level_keys": [
+        "replicas",
+        "secret",
+        "memcachedInstance"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "apiOverride",
+        "enabled",
+        "template",
+        "template.customServiceConfig",
+        "template.defaultConfigOverwrite",
+        "template.extraSpec",
+        "template.memcachedInstance",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.preserveJobs",
+        "template.replicas",
+        "template.resources",
+        "template.secret",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "apiOverride",
+        "template",
+        "template.defaultConfigOverwrite",
+        "template.extraSpec",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.resources",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": []
+    },
+    "telemetry": {
+      "top_level_service_keys": [
+        "enabled",
+        "template"
+      ],
+      "template_level_keys": [
+        "ceilometer",
+        "autoscaling",
+        "metricStorage",
+        "logging",
+        "cloudkitty"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "alertmanagerOverride",
+        "aodhApiOverride",
+        "applicationCredentialAodh",
+        "applicationCredentialCeilometer",
+        "applicationCredentialCloudKitty",
+        "cloudKittyApiOverride",
+        "enabled",
+        "prometheusOverride",
+        "template",
+        "template.autoscaling",
+        "template.ceilometer",
+        "template.cloudkitty",
+        "template.customServiceConfig",
+        "template.enabled",
+        "template.extraSpec",
+        "template.logging",
+        "template.metricStorage",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.resources",
+        "template.secret",
+        "template.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "alertmanagerOverride",
+        "aodhApiOverride",
+        "applicationCredentialAodh",
+        "applicationCredentialCeilometer",
+        "applicationCredentialCloudKitty",
+        "cloudKittyApiOverride",
+        "prometheusOverride",
+        "template",
+        "template.autoscaling",
+        "template.ceilometer",
+        "template.cloudkitty",
+        "template.extraSpec",
+        "template.logging",
+        "template.metricStorage",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.resources",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": []
+    },
+    "swift": {
+      "top_level_service_keys": [
+        "enabled",
+        "proxyOverride",
+        "template"
+      ],
+      "template_level_keys": [
+        "storageClass",
+        "memcachedInstance",
+        "swiftRing",
+        "swiftStorage",
+        "swiftProxy"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "applicationCredential",
+        "enabled",
+        "proxyOverride",
+        "template",
+        "template.extraSpec",
+        "template.memcachedInstance",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.ringConfigMaps",
+        "template.storageClass",
+        "template.swiftProxy",
+        "template.swiftRing",
+        "template.swiftStorage",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "applicationCredential",
+        "proxyOverride",
+        "template",
+        "template.extraSpec",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.ringConfigMaps",
+        "template.swiftProxy",
+        "template.swiftRing",
+        "template.swiftStorage",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": []
+    },
+    "octavia": {
+      "top_level_service_keys": [
+        "enabled",
+        "apiOverride",
+        "template"
+      ],
+      "template_level_keys": [
+        "databaseInstance",
+        "secret",
+        "octaviaNetworkAttachment",
+        "apacheContainerImage",
+        "octaviaAPI",
+        "octaviaHousekeeping",
+        "octaviaHealthManager",
+        "octaviaWorker",
+        "lbMgmtNetwork"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "apiOverride",
+        "applicationCredential",
+        "enabled",
+        "template",
+        "template.amphoraImageContainerImage",
+        "template.apacheContainerImage",
+        "template.apiTimeout",
+        "template.customServiceConfig",
+        "template.databaseAccount",
+        "template.databaseInstance",
+        "template.extraSpec",
+        "template.lbMgmtNetwork",
+        "template.memcachedInstance",
+        "template.nodeSelector",
+        "template.octaviaAPI",
+        "template.octaviaHealthManager",
+        "template.octaviaHousekeeping",
+        "template.octaviaNetworkAttachment",
+        "template.octaviaRsyslog",
+        "template.octaviaWorker",
+        "template.persistenceDatabaseAccount",
+        "template.rabbitMqClusterName",
+        "template.redisServiceName",
+        "template.secret",
+        "template.serviceAccount",
+        "template.tenantName",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "apiOverride",
+        "applicationCredential",
+        "template",
+        "template.extraSpec",
+        "template.lbMgmtNetwork",
+        "template.nodeSelector",
+        "template.octaviaAPI",
+        "template.octaviaHealthManager",
+        "template.octaviaHousekeeping",
+        "template.octaviaRsyslog",
+        "template.octaviaWorker",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": []
+    },
+    "designate": {
+      "top_level_service_keys": [
+        "enabled",
+        "apiOverride",
+        "template"
+      ],
+      "template_level_keys": [
+        "databaseInstance",
+        "secret",
+        "designateAPI",
+        "designateCentral",
+        "designateWorker",
+        "designateMdns",
+        "designateProducer",
+        "designateBackendbind9",
+        "designateUnbound"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "apiOverride",
+        "applicationCredential",
+        "enabled",
+        "template",
+        "template.backendType",
+        "template.customServiceConfig",
+        "template.databaseAccount",
+        "template.databaseInstance",
+        "template.designateAPI",
+        "template.designateBackendbind9",
+        "template.designateCentral",
+        "template.designateMdns",
+        "template.designateProducer",
+        "template.designateUnbound",
+        "template.designateWorker",
+        "template.extraSpec",
+        "template.memcachedInstance",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.nsRecords",
+        "template.rabbitMqClusterName",
+        "template.redisServiceName",
+        "template.secret",
+        "template.serviceAccount",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "apiOverride",
+        "applicationCredential",
+        "template",
+        "template.designateAPI",
+        "template.designateBackendbind9",
+        "template.designateCentral",
+        "template.designateMdns",
+        "template.designateProducer",
+        "template.designateUnbound",
+        "template.designateWorker",
+        "template.extraSpec",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.nsRecords",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": []
+    },
+    "barbican": {
+      "top_level_service_keys": [
+        "enabled",
+        "apiOverride",
+        "template"
+      ],
+      "template_level_keys": [
+        "databaseInstance",
+        "serviceAccount",
+        "barbicanAPI",
+        "barbicanWorker",
+        "barbicanKeystoneListener"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "apiOverride",
+        "applicationCredential",
+        "enabled",
+        "template",
+        "template.apiTimeout",
+        "template.barbicanAPI",
+        "template.barbicanKeystoneListener",
+        "template.barbicanWorker",
+        "template.customServiceConfig",
+        "template.databaseAccount",
+        "template.databaseInstance",
+        "template.extraSpec",
+        "template.memcachedInstance",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.rabbitMqClusterName",
+        "template.secret",
+        "template.serviceAccount",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "apiOverride",
+        "applicationCredential",
+        "template",
+        "template.barbicanAPI",
+        "template.barbicanKeystoneListener",
+        "template.barbicanWorker",
+        "template.extraSpec",
+        "template.networkAttachments",
+        "template.nodeSelector",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": []
+    },
+    "redis": {
+      "top_level_service_keys": [
+        "enabled",
+        "templates"
+      ],
+      "template_level_keys": [],
+      "map_instance_keys": [
+        "replicas"
+      ],
+      "explicit_keys": [
+        "enabled",
+        "templates",
+        "templates.<instance>.extraSpec",
+        "templates.<instance>.nodeSelector",
+        "templates.<instance>.replicas",
+        "templates.<instance>.resources",
+        "templates.<instance>.sentinelResources",
+        "templates.<instance>.tls",
+        "templates.<instance>.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "templates",
+        "templates.<instance>.extraSpec",
+        "templates.<instance>.nodeSelector",
+        "templates.<instance>.resources",
+        "templates.<instance>.sentinelResources",
+        "templates.<instance>.tls",
+        "templates.<instance>.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": [
+        "Map-based service: coverage evaluated against templates.<instance> keys from sample instance in values file."
+      ]
+    },
+    "watcher": {
+      "top_level_service_keys": [
+        "enabled",
+        "apiOverride",
+        "template"
+      ],
+      "template_level_keys": [
+        "databaseInstance",
+        "apiServiceTemplate",
+        "applierServiceTemplate",
+        "decisionengineServiceTemplate"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "apiOverride",
+        "applicationCredential",
+        "enabled",
+        "template",
+        "template.apiServiceTemplate",
+        "template.applierServiceTemplate",
+        "template.customServiceConfig",
+        "template.databaseAccount",
+        "template.databaseInstance",
+        "template.dbPurge",
+        "template.decisionengineServiceTemplate",
+        "template.extraSpec",
+        "template.memcachedInstance",
+        "template.nodeSelector",
+        "template.rabbitMqClusterName",
+        "template.secret",
+        "template.serviceAccount",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "apiOverride",
+        "applicationCredential",
+        "template",
+        "template.apiServiceTemplate",
+        "template.applierServiceTemplate",
+        "template.dbPurge",
+        "template.decisionengineServiceTemplate",
+        "template.extraSpec",
+        "template.nodeSelector",
+        "template.tls",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": []
+    },
+    "openstackclient": {
+      "top_level_service_keys": [
+        "template"
+      ],
+      "template_level_keys": [
+        "openStackConfigMap",
+        "openStackConfigSecret"
+      ],
+      "map_instance_keys": [],
+      "explicit_keys": [
+        "template.caBundleSecretName",
+        "template.env",
+        "template.extraSpec",
+        "template.nodeSelector",
+        "template.openStackConfigMap",
+        "template.openStackConfigSecret",
+        "template.topologyRef"
+      ],
+      "nested_toYaml_coverage_points": [
+        "template.env",
+        "template.extraSpec",
+        "template.nodeSelector",
+        "template.topologyRef"
+      ],
+      "missing_keys": [],
+      "notes": [
+        "No enabled flag by design (always deployed by operator)."
+      ]
+    },
+    "tls": {
+      "top_level_service_keys": [
+        "ingress",
+        "podLevel"
+      ],
+      "template_level_keys": [],
+      "map_instance_keys": [],
+      "explicit_keys": [],
+      "nested_toYaml_coverage_points": [
+        "<service-root> (.Values.tls via toYaml)"
+      ],
+      "missing_keys": [],
+      "notes": [
+        "tls is rendered via full toYaml passthrough at service root."
+      ]
+    }
+  }
+}
