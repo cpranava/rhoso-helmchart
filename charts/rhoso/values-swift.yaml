@@ -15,6 +15,10 @@ swift:
     #   secretName: swift-public-tls
 
   template:
+
+    # -- extraSpec: passthrough for CRD fields not explicitly templated
+    # extraSpec:
+    #   customField: value
     # -- StorageClass for Swift storage PVCs (also falls back to global)
     # +kubebuilder:default=""
     storageClass: ""

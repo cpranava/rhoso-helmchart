@@ -17,6 +17,10 @@ designate:
     #   secretName: designate-public-tls
 
   template:
+
+    # -- extraSpec: passthrough for CRD fields not explicitly templated
+    # extraSpec:
+    #   customField: value
     # -- MariaDB instance name
     # +kubebuilder:default=openstack
     databaseInstance: openstack

@@ -40,6 +40,12 @@ redis:
         {{- toYaml . | nindent 8 }}
       {{- end }}
 
+
+      {{- with $inst.extraSpec }}
+      # -- Escape hatch: passthrough for unsupported CRD fields
+      extraSpec:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- with $inst.topologyRef }}
       # -- Topology spread reference
       topologyRef:

@@ -85,6 +85,12 @@ telemetry:
       {{- toYaml . | nindent 6 }}
     {{- end }}
 
+
+    {{- with .extraSpec }}
+    # -- Escape hatch: passthrough for unsupported CRD fields
+    extraSpec:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
     {{- with .topologyRef }}
     # -- Topology spread reference
     topologyRef:

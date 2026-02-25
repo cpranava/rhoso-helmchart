@@ -15,6 +15,9 @@ memcached:
 
     # Default instance — referenced as 'memcachedInstance: memcached' by most services
     memcached:
+      # -- extraSpec: passthrough for fields not explicitly templated
+      # extraSpec:
+      #   customField: value
       # -- Number of Memcached replicas
       # +kubebuilder:default=1
       replicas: 1

@@ -16,6 +16,9 @@ rabbitmq:
 
     # Primary RPC message bus used by most services
     rabbitmq:
+      # -- extraSpec: passthrough for fields not explicitly templated
+      # extraSpec:
+      #   customField: value
       # -- Number of RabbitMQ replicas
       # +kubebuilder:default=1
       replicas: 1

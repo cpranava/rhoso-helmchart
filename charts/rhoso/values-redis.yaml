@@ -15,6 +15,9 @@ redis:
   templates:
 
     octavia-redis:
+      # -- extraSpec: passthrough for fields not explicitly templated
+      # extraSpec:
+      #   customField: value
       # -- Number of Redis replicas (with Sentinel for HA)
       # +kubebuilder:default=1
       replicas: 1

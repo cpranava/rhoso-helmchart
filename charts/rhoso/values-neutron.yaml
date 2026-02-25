@@ -14,6 +14,10 @@ neutron:
     #   secretName: neutron-public-tls
 
   template:
+
+    # -- extraSpec: passthrough for CRD fields not explicitly templated
+    # extraSpec:
+    #   customField: value
     # -- Number of Neutron API replicas
     # +kubebuilder:default=1
     replicas: 1

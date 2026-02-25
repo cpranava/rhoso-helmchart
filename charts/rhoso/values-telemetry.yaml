@@ -33,6 +33,10 @@ telemetry:
   #   route: {}
 
   template:
+
+    # -- extraSpec: passthrough for CRD fields not explicitly templated
+    # extraSpec:
+    #   customField: value
     # --------------------------------------------------------------------------
     # Ceilometer — metering service (enabled by default)
     # --------------------------------------------------------------------------

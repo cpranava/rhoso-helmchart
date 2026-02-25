@@ -16,6 +16,10 @@ octavia:
     #   secretName: octavia-public-tls
 
   template:
+
+    # -- extraSpec: passthrough for CRD fields not explicitly templated
+    # extraSpec:
+    #   customField: value
     # -- MariaDB instance name (required by CRD)
     # +kubebuilder:default=openstack
     databaseInstance: openstack

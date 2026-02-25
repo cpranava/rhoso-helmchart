@@ -64,3 +64,7 @@ tls:
   # Required if any service uses a custom cert/key signed by a private CA.
   # ---------------------------------------------------------------------------
   # caBundleSecretName: my-ca-bundle-secret
+
+# -- extraSpec: passthrough for future TLS section fields
+# extraSpec:
+#   customField: value

@@ -20,6 +20,10 @@ glance:
   # uniquePodNames: false
 
   template:
+
+    # -- extraSpec: passthrough for CRD fields not explicitly templated
+    # extraSpec:
+    #   customField: value
     # -- StorageClass for the Glance backend PVC (falls back to global)
     # storageClass: ""
 

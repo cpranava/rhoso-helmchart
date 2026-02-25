@@ -15,6 +15,9 @@ galera:
 
     # Primary control-plane database
     openstack:
+      # -- extraSpec: passthrough for fields not explicitly templated
+      # extraSpec:
+      #   customField: value
       # -- Number of Galera replicas (should be 1 or 3)
       # +kubebuilder:default=1
       replicas: 3

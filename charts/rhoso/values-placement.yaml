@@ -14,6 +14,10 @@ placement:
     #   secretName: placement-public-tls
 
   template:
+
+    # -- extraSpec: passthrough for CRD fields not explicitly templated
+    # extraSpec:
+    #   customField: value
     # -- Number of Placement API replicas
     # +kubebuilder:default=1
     replicas: 1

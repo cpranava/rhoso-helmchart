@@ -12,6 +12,10 @@ ovn:
 
   template:
 
+    # -- extraSpec: passthrough for OVN template fields not explicitly templated
+    # extraSpec:
+    #   customField: value
+
     # -------------------------------------------------------------------------
     # OVN DB Clusters (map-based — supports multiple DB cluster instances)
     # Exactly two clusters are required: one NB (northbound) and one SB (southbound)
@@ -20,6 +24,9 @@ ovn:
 
       # Northbound DB cluster
       ovndbcluster-nb:
+        # -- extraSpec: passthrough for this OVN DB cluster
+        # extraSpec:
+        #   customField: value
         # -- DB type: NB (northbound) or SB (southbound)
         # +kubebuilder:default=NB
         dbType: NB

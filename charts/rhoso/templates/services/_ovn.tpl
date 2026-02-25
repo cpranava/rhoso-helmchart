@@ -12,6 +12,12 @@ ovn:
   enabled: {{ .Values.ovn.enabled }}
   {{- with .Values.ovn.template }}
   template:
+    {{- with .extraSpec }}
+    # -- Escape hatch: passthrough for unsupported OVN template fields
+    extraSpec:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+
     {{- with .ovnDBCluster }}
     # -- OVN DB Clusters (NB and SB)
     ovnDBCluster:
@@ -44,6 +50,12 @@ ovn:
           {{- toYaml . | nindent 10 }}
         {{- end }}
 
+
+        {{- with $cluster.extraSpec }}
+        # -- Escape hatch: passthrough for unsupported OVN DB cluster fields
+        extraSpec:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         {{- with $cluster.topologyRef }}
         # -- Topology spread reference
         topologyRef:

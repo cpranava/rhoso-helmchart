@@ -23,6 +23,10 @@ nova:
   #       route: {}
 
   template:
+
+    # -- extraSpec: passthrough for CRD fields not explicitly templated
+    # extraSpec:
+    #   customField: value
     # -- MariaDB instance name for the Nova 'api' and 'cell0' databases
     # +kubebuilder:default=openstack
     apiDatabaseInstance: openstack

@@ -9,6 +9,10 @@
 openstackclient:
   template:
 
+    # -- extraSpec: passthrough for CRD fields not explicitly templated
+    # extraSpec:
+    #   customField: value
+
     # Name of the ConfigMap containing clouds.yaml
     # Created automatically by the operator (default: openstack-config)
     openStackConfigMap: openstack-config
