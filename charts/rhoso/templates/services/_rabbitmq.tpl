@@ -11,6 +11,41 @@ rabbitmq:
   enabled: {{ .Values.rabbitmq.enabled }}
   {{- with .Values.rabbitmq.templates }}
   templates:
-    {{- toYaml . | nindent 4 }}
+    {{- range $name, $inst := . }}
+    # -- Named RabbitMQ cluster instance: {{ $name }}
+    {{ $name }}:
+      # -- Number of RabbitMQ replicas
+      replicas: {{ $inst.replicas | default 1 }}
+
+      {{- with $inst.resources }}
+      # -- Resource requests/limits for the RabbitMQ container
+      resources:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      {{- with $inst.override }}
+      # -- Override the generated Service (e.g. annotations)
+      override:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      {{- with $inst.nodeSelector }}
+      # -- Node selector override for this cluster
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      {{- with $inst.tls }}
+      # -- TLS settings for intra-cluster communication
+      tls:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      {{- with $inst.topologyRef }}
+      # -- Topology spread reference
+      topologyRef:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- end }}
   {{- end }}
 {{- end }}
