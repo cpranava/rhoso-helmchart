@@ -1,0 +1,10 @@
+{{- define "osp.galera" -}}
+{{- if .Values.spec.galera }}
+galera:
+  templates:
+    {{- range $name, $config := .Values.spec.galera.templates }}
+    {{ $name }}:
+      {{- toYaml $config | nindent 6 }}
+    {{- end }}
+{{- end }}
+{{- end }}

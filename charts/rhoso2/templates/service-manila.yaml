@@ -1,0 +1,8 @@
+{{- define "osp.manila" -}}
+{{- if .Values.spec.manila.enabled }}
+manila:
+  enabled: {{ .Values.spec.manila.enabled }}
+  template:
+    {{- toYaml .Values.spec.manila.template | nindent 6 }}
+{{- end }}
+{{- end }}

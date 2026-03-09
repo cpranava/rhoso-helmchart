@@ -1,0 +1,13 @@
+{{- define "osp.manila" -}}
+{{- if .Values.spec.manila.enabled }}
+manila:
+  {{- toYaml .Values.spec.manila | nindent 2 }}
+{{- end }}
+{{- end }}
+
+{{- define "osp.swift" -}}
+{{- if .Values.spec.swift.enabled }}
+swift:
+  {{- toYaml .Values.spec.swift | nindent 2 }}
+{{- end }}
+{{- end }}

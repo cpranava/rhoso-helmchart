@@ -1,0 +1,10 @@
+{{- define "osp.barbican" -}}
+{{- if .Values.spec.barbican.enabled }}
+barbican:
+  enabled: {{ .Values.spec.barbican.enabled }}
+  apiOverride:
+    {{- toYaml .Values.spec.barbican.apiOverride | nindent 6 }}
+  template:
+    {{- toYaml .Values.spec.barbican.template | nindent 6 }}
+{{- end }}
+{{- end }}

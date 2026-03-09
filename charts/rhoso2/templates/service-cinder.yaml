@@ -1,0 +1,8 @@
+{{- define "osp.cinder" -}}
+{{- if .Values.spec.cinder.enabled | default true }}
+cinder:
+  {{- toYaml .Values.spec.cinder | nindent 2 }}
+extraMounts:
+  {{- toYaml .Values.spec.extraMounts | nindent 2 }}
+{{- end }}
+{{- end }}

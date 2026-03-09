@@ -1,0 +1,20 @@
+{{- define "osp.dns" -}}
+{{- if .Values.spec.dns }}
+dns:
+  template:
+    override:
+      service:
+        metadata:
+          annotations:
+            {{- toYaml .Values.spec.dns.template.override.service.metadata.annotations | nindent 12 }}
+        spec:
+          {{- toYaml .Values.spec.dns.template.override.service.spec | nindent 10 }}
+    options:
+      {{- range $opt := .Values.spec.dns.options }}
+      - key: {{ $opt.key | quote }}
+        values:
+          {{- toYaml $opt.values | nindent 10 }}
+      {{- end }}
+    replicas: {{ .Values.spec.dns.replicas | default 2 }}
+{{- end }}
+{{- end }}

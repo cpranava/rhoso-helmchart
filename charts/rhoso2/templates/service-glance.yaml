@@ -1,0 +1,7 @@
+{{- define "osp.glance" -}}
+{{- if .Values.spec.glance.enabled | default true }}
+glance:
+  enabled: {{ .Values.spec.glance.enabled | default true }}
+  {{- toYaml (omit .Values.spec.glance "enabled") | nindent 2 }}
+{{- end }}
+{{- end }}

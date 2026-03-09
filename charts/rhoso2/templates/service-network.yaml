@@ -1,0 +1,11 @@
+{{- define "osp.neutron" -}}
+neutron:
+  {{- toYaml .Values.spec.neutron | nindent 2 }}
+ovn:
+  {{- toYaml .Values.spec.ovn | nindent 2 }}
+{{- end }}
+
+{{- define "osp.placement" -}}
+placement:
+  {{- toYaml .Values.spec.placement | nindent 2 }}
+{{- end }}

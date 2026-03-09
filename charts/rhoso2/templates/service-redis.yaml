@@ -1,0 +1,13 @@
+{{- define "osp.redis" -}}
+{{- if .Values.spec.redis.enabled }}
+redis:
+  {{- if .Values.spec.redis.template }}
+  template:
+    {{- toYaml .Values.spec.redis.template | nindent 4 }}
+  {{- else }}
+  template:
+    replicas: {{ .Values.spec.redis.replicas | default 1 }}
+    storageRequest: {{ .Values.spec.redis.storageRequest | default "1G" }}
+  {{- end }}
+{{- end }}
+{{- end }}

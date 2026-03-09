@@ -1,0 +1,20 @@
+{{- define "osp.heat" -}}
+{{- if .Values.spec.heat.enabled }}
+heat:
+  {{- toYaml .Values.spec.heat | nindent 2 }}
+{{- end }}
+{{- end }}
+
+{{- define "osp.ironic" -}}
+{{- if .Values.spec.ironic.enabled }}
+ironic:
+  {{- toYaml .Values.spec.ironic | nindent 2 }}
+{{- end }}
+{{- end }}
+
+{{- define "osp.telemetry" -}}
+{{- if .Values.spec.telemetry.enabled }}
+telemetry:
+  {{- toYaml .Values.spec.telemetry | nindent 2 }}
+{{- end }}
+{{- end }}

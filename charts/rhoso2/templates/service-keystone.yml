@@ -1,0 +1,9 @@
+{{- define "osp.keystone" -}}
+{{- if .Values.spec.keystone.enabled | default true }}
+keystone:
+  apiOverride:
+    {{- toYaml .Values.spec.keystone.apiOverride | nindent 4 }}
+  template:
+    {{- toYaml .Values.spec.keystone.template | nindent 4 }}
+{{- end }}
+{{- end }}

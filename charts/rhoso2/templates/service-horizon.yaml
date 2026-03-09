@@ -1,0 +1,12 @@
+{{- define "osp.horizon" -}}
+{{- if .Values.spec.horizon.enabled | default true }}
+horizon:
+  {{- if .Values.spec.horizon.apiOverride }}
+  apiOverride:
+    {{- toYaml .Values.spec.horizon.apiOverride | nindent 4 }}
+  {{- end }}
+  template:
+    replicas: {{ .Values.spec.horizon.template.replicas | default 1 }}
+    secret: {{ .Values.spec.horizon.template.secret | default .Values.spec.secret }}
+{{- end }}
+{{- end }}
