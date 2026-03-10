@@ -3,6 +3,6 @@
 manila:
   enabled: {{ .Values.spec.manila.enabled }}
   template:
-    {{- toYaml .Values.spec.manila.template | nindent 6 }}
+    {{- toYaml .Values.spec.manila.apiOverride | nindent 4 }}
 {{- end }}
 {{- end }}

@@ -4,7 +4,7 @@ galera:
   templates:
     {{- range $name, $config := .Values.spec.galera.templates }}
     {{ $name }}:
-      {{- toYaml $config | nindent 6 }}
+      {{- toYaml $config | nindent 4 }}
     {{- end }}
 {{- end }}
 {{- end }}

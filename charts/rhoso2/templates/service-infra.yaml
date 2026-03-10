@@ -2,11 +2,12 @@
 rabbitmq:
   templates:
     {{- range $name, $config := .Values.spec.rabbitmq.templates }}
+    {{- if eq "replicas" $name  }}
+    replicas: {{ $config }}
+    {{- else }}
     {{ $name }}:
-      {{- if $config.override }}
-      override:
-        {{- toYaml $config.override | nindent 8 }}
-      {{- end }}
+      {{- toYaml $config | nindent 4 }}
+    {{- end }}
     {{- end }}
 {{- end }}
 

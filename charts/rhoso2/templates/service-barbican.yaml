@@ -3,8 +3,8 @@
 barbican:
   enabled: {{ .Values.spec.barbican.enabled }}
   apiOverride:
-    {{- toYaml .Values.spec.barbican.apiOverride | nindent 6 }}
+    {{- toYaml .Values.spec.barbican.apiOverride | nindent 4 }}
   template:
-    {{- toYaml .Values.spec.barbican.template | nindent 6 }}
+    {{- toYaml .Values.spec.barbican.template | nindent 4 }}
 {{- end }}
 {{- end }}

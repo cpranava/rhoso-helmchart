@@ -1,0 +1,29 @@
+apiVersion: core.openstack.org/v1beta1
+kind: OpenStackControlPlane
+metadata:
+  name: {{ .Values.metadata.name | default "openstack" }}
+spec:
+  secret: {{ .Values.spec.secret }}
+  storageClass: {{ .Values.spec.storageClass }}
+
+  {{- /* Infrastructure Services */ -}}
+  {{- include "osp.dns" . | nindent 2 }}
+  {{- include "osp.galera" . | nindent 2 }}
+  {{- include "osp.rabbitmq" . | nindent 2 }}
+  {{- include "osp.memcached" . | nindent 2 }}
+  {{- include "osp.redis" . | nindent 2 }}
+
+  {{- /* OpenStack Services (Only render if enabled) */ -}}
+  {{- include "osp.keystone" . | nindent 2 }}
+  {{- include "osp.glance" . | nindent 2 }}
+  {{- include "osp.nova" . | nindent 2 }}
+  {{- include "osp.cinder" . | nindent 2 }}
+  {{- include "osp.neutron" . | nindent 2 }}
+  {{- include "osp.placement" . | nindent 2 }}
+  {{- include "osp.horizon" . | nindent 2 }}
+  {{- include "osp.barbican" . | nindent 2 }}
+  {{- include "osp.manila" . | nindent 2 }}
+  {{- include "osp.telemetry" . | nindent 2 }}
+  {{- include "osp.heat" . | nindent 2 }}
+  {{- include "osp.ironic" . | nindent 2 }}
+  {{- include "osp.swift" . | nindent 2 }}
